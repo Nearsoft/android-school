@@ -10,8 +10,5 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.nearsoft.androidschool.todoapp.TODOMain">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
+    <include layout="@layout/todo_list"/>
 </RelativeLayout>
