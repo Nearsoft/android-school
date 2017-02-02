@@ -1,4 +1,4 @@
-package com.nearsoft.androidschool.todoapp.Activities;
+package com.nearsoft.androidschool.todoapp.activities;
 
 import android.app.Activity;
 
@@ -6,5 +6,5 @@ import android.app.Activity;
  * Created by Ramon on 2/1/2017.
  */
 //TODO fill this
-public class TODOContent extends Activity {
+public class TodoContent extends Activity {
 }

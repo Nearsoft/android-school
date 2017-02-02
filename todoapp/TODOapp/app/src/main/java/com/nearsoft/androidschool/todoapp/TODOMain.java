@@ -5,11 +5,11 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.nearsoft.androidschool.todoapp.Activities.TODOListAdapter;
+import com.nearsoft.androidschool.todoapp.activities.TodoListAdapter;
 
-public class TODOMain extends AppCompatActivity {
+public class TodoMain extends AppCompatActivity {
 
-    private TODOListAdapter adapter;
+    private TodoListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,7 +17,7 @@ public class TODOMain extends AppCompatActivity {
         setContentView(R.layout.activity_todomain);
 
         RecyclerView rvTODO = (RecyclerView) findViewById(R.id.rvTODOList);
-        adapter = new TODOListAdapter();
+        adapter = new TodoListAdapter();
 
         rvTODO.setLayoutManager(new LinearLayoutManager(this));
         rvTODO.setAdapter(adapter);
