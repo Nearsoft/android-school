@@ -1,9 +1,5 @@
 package com.nearsoft.androidschool.todoapp;
 
-
-/**
- * Created by Ramon on 2/1/2017.
- */
 public class ToDoContent{
     //TODO: define contents of a single item
     private String title;
