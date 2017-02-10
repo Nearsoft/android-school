@@ -25,8 +25,8 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ViewHo
     @Override
     public ToDoListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
-        View item = inflater.inflate(R.layout.list_item, parent, false);
-        return new ViewHolder(item);
+        View itemView = inflater.inflate(R.layout.list_item, parent, false);
+        return new ViewHolder(itemView);
     }
 
     @Override
