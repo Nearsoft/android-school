@@ -1,15 +1,19 @@
-package com.nearsoft.androidschool.todoapp;
+package com.nearsoft.androidschool.todoapp.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.nearsoft.androidschool.todoapp.activities.TodoListAdapter;
+import com.nearsoft.androidschool.todoapp.R;
+import com.nearsoft.androidschool.todoapp.ToDoContent;
+import com.nearsoft.androidschool.todoapp.ToDoListAdapter;
 
-public class TodoMain extends AppCompatActivity {
+import java.util.ArrayList;
 
-    private TodoListAdapter adapter;
+public class ToDoMain extends AppCompatActivity {
+
+    private ToDoListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,7 +21,7 @@ public class TodoMain extends AppCompatActivity {
         setContentView(R.layout.activity_todomain);
 
         RecyclerView rvTODO = (RecyclerView) findViewById(R.id.rvTODOList);
-        adapter = new TodoListAdapter();
+        adapter = new ToDoListAdapter(this, new ArrayList<ToDoContent>());
 
         rvTODO.setLayoutManager(new LinearLayoutManager(this));
         rvTODO.setAdapter(adapter);
