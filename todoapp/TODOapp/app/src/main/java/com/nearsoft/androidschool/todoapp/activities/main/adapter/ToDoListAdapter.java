@@ -64,7 +64,6 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ViewHo
         void bindData(ToDoContent toDoItem) {
             toDoNameTextBox.setText(toDoItem.getTitle());
             dateTextBox.setText(toDoItem.getDate());
-//  TODO: this might be refactor
             doneCheckbox.setOnClickListener(this);
             mapButton.setOnClickListener(this);
             container.setOnClickListener(this);
@@ -73,15 +72,12 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ViewHo
         @Override
         public void onClick(View view) {
             if (view.getId() == R.id.isDoneCheckbox) {
-//  TODO: should hide the item
                 Snackbar.make(mapButton, "this should hide this item when clicked maybe", Snackbar.LENGTH_SHORT).show();
             }
             if (view.getId() == R.id.mapImageButton) {
-//  TODO: open an intent to the map to sho location maybe
                 Snackbar.make(mapButton, "this should show the map in google maps", Snackbar.LENGTH_SHORT).show();
             }
             if (view.getId() == R.id.cardViewContainer) {
-//  TODO: open an intent to the map to sho location maybe
                 Snackbar.make(mapButton, "This should take you to the detail", Snackbar.LENGTH_SHORT).show();
             }
         }

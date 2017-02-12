@@ -1,7 +1,6 @@
 package com.nearsoft.androidschool.todoapp.models;
 
 public class ToDoContent {
-    //TODO: define contents of a single item
     private String title;
     private String date;
     private boolean done;

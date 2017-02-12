@@ -35,23 +35,16 @@ public class ToDoMain extends AppCompatActivity {
         addToDoItemFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fabAction();
+                Snackbar.make(addToDoItemFab, "this should take you to and activity to add a new task ", Snackbar.LENGTH_SHORT).show();
             }
         });
     }
 
-    private void fabAction() {
-//        TODO:add the intent to call the Add item Activity
-        Snackbar.make(addToDoItemFab, "this should take you to and activity to add a new task ", Snackbar.LENGTH_SHORT).show();
-    }
-
-    //    TODO:delet this when retrieving real data
     public List<ToDoContent> getData() {
-        List<ToDoContent> fakeList = new ArrayList<>();
-        fakeList.add(new ToDoContent("task 1", "Today", "at Nearsoft"));
-        fakeList.add(new ToDoContent("task 2", "Today", "at Nearsoft"));
-        fakeList.add(new ToDoContent("task 3", "yesterday", "at Cafenio"));
-
-        return fakeList;
+        List<ToDoContent> data = new ArrayList<>();
+        data.add(new ToDoContent("task 1", "Today", "at Nearsoft"));
+        data.add(new ToDoContent("task 2", "Today", "at Nearsoft"));
+        data.add(new ToDoContent("task 3", "yesterday", "at Cafenio"));
+        return data;
     }
 }
