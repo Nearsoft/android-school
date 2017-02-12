@@ -15,9 +15,6 @@ import com.nearsoft.androidschool.todoapp.models.ToDoContent;
 
 import java.util.List;
 
-/**
- * Created by Ramon on 2/1/2017.
- */
 public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ViewHolder> {
 
     private List<ToDoContent> toDoList;
