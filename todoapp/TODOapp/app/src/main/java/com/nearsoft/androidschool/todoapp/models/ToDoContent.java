@@ -6,6 +6,7 @@ public class ToDoContent {
     private boolean done;
     private String location;
     private boolean starred;
+    private String notes;
 
     public ToDoContent(String title, String date, String location) {
         this.title = title;
@@ -51,5 +52,13 @@ public class ToDoContent {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 }
