@@ -42,7 +42,7 @@ public class ToDoMain extends AppCompatActivity {
 
     private void fabAction() {
 //        TODO:add the intent to call the Add item Activity
-        Snackbar.make(mAddToDoItemFab, "Function not implemented yet", Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(mAddToDoItemFab, "this should take you to and activity to add a new task ", Snackbar.LENGTH_SHORT).show();
     }
 
     //    TODO:delet this when retrieving real data
