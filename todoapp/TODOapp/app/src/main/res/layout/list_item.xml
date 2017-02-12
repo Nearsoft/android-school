@@ -3,27 +3,49 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
-    android:paddingTop="10dp"
-    android:minHeight="72dp"
-    android:paddingBottom="10dp"
-    android:elevation="2dp">
+    android:minHeight="72dp">
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:paddingBottom="16dp"
-        android:paddingTop="16dp"
-        android:layout_alignWithParentIfMissing="true"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_height="match_parent"
         android:layout_centerVertical="true"
-        android:orientation="vertical">
-        <TextView
-            style="@style/TextAppearance.AppCompat.Body1"
-            android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <ImageButton
+            android:id="@+id/starImageButton"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:text="@string/hello_world"
-            android:id="@+id/TODOtext"/>
+            android:layout_weight="1"
+            android:background="#00ffffff"
+            android:gravity="start"
+            android:src="@android:drawable/btn_star" />
+
+        <TextView
+            android:id="@+id/toDoText"
+            style="@style/TextAppearance.AppCompat.Body1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:maxLines="1" />
+
+        <TextView
+            android:id="@+id/dateText"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:maxLines="1" />
+
+        <ImageButton
+            android:id="@+id/mapImageButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#00ffffff"
+            android:gravity="end"
+            android:src="@drawable/ic_pin_red" />
+
     </LinearLayout>
 </android.support.v7.widget.CardView>
