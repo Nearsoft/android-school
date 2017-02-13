@@ -5,21 +5,30 @@
     android:id="@+id/activity_todo_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/activity_vertical_margin"
-    tools:context="com.nearsoft.androidschool.todoapp.activities.main.ToDoMain">
+    tools:context="com.nearsoft.androidschool.todoapp.activities.main.MainActivity">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvTODOList"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:scrollbars="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp" />
+
+    </RelativeLayout>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/addToDoItemFab"
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="10dp"
         android:src="@drawable/ic_add_white"
-        app:layout_anchor="@id/rvTODOList"
+        app:layout_anchor="@id/recycler_view"
         app:layout_anchorGravity="bottom|right|end" />
 
 </android.support.design.widget.CoordinatorLayout>
