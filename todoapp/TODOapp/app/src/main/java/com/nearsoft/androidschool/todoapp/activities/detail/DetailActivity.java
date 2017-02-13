@@ -17,6 +17,7 @@ public class DetailActivity extends AppCompatActivity {
 
     private TextView titleTextView;
     private TextView notesTextView;
+    private TextView dateTextView;
     private FloatingActionButton editFab;
 
     private ToDoContent todo;
@@ -28,6 +29,7 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
         titleTextView = (TextView) findViewById(R.id.title);
         notesTextView = (TextView) findViewById(R.id.notes);
+        dateTextView = (TextView) findViewById(R.id.date_text);
         editFab = (FloatingActionButton) findViewById(R.id.fab);
         editFab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,6 +40,7 @@ public class DetailActivity extends AppCompatActivity {
 
         titleTextView.setText(todo.getTitle());
         notesTextView.setText(todo.getNotes());
+        dateTextView.setText(todo.getDate());
     }
 
     private ToDoContent getTodo() {
