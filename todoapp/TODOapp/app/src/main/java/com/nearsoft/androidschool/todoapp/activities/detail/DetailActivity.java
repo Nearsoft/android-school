@@ -2,7 +2,10 @@ package com.nearsoft.androidschool.todoapp.activities.detail;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.TextView;
 
 import com.nearsoft.androidschool.todoapp.R;
@@ -14,6 +17,7 @@ public class DetailActivity extends AppCompatActivity {
 
     private TextView titleTextView;
     private TextView notesTextView;
+    private FloatingActionButton editFab;
 
     private ToDoContent todo;
 
@@ -24,6 +28,14 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
         titleTextView = (TextView) findViewById(R.id.title);
         notesTextView = (TextView) findViewById(R.id.notes);
+        editFab = (FloatingActionButton) findViewById(R.id.fab);
+        editFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Snackbar.make(editFab, "should open the \"edit\" activity", Snackbar.LENGTH_SHORT).show();
+            }
+        });
+
         titleTextView.setText(todo.getTitle());
         notesTextView.setText(todo.getNotes());
     }
