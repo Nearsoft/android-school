@@ -1,5 +1,6 @@
 package com.nearsoft.androidschool.todoapp.activities.main.adapter;
 
+import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +12,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.nearsoft.androidschool.todoapp.R;
+import com.nearsoft.androidschool.todoapp.activities.detail.DetailActivity;
 import com.nearsoft.androidschool.todoapp.models.ToDoContent;
 
 import java.util.List;
@@ -43,6 +45,7 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ViewHo
 
     static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
+        ToDoContent item;
         CardView container;
         TextView toDoNameTextBox;
         TextView dateTextBox;
@@ -59,6 +62,7 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ViewHo
         }
 
         void bindData(ToDoContent toDoItem) {
+            item = toDoItem;
             toDoNameTextBox.setText(toDoItem.getTitle());
             dateTextBox.setText(toDoItem.getDate());
             doneCheckbox.setOnClickListener(this);
@@ -75,7 +79,9 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ViewHo
                 Snackbar.make(mapButton, "this should show the map in google maps", Snackbar.LENGTH_SHORT).show();
             }
             if (view.getId() == R.id.cardViewContainer) {
-                Snackbar.make(mapButton, "This should take you to the detail", Snackbar.LENGTH_SHORT).show();
+                Intent intent = new Intent(itemView.getContext(), DetailActivity.class);
+                intent.putExtra(DetailActivity.EXTRA_TODO_KEY, item);
+                itemView.getContext().startActivity(intent);
             }
         }
     }

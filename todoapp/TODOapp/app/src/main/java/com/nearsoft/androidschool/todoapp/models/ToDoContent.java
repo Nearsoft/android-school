@@ -1,6 +1,8 @@
 package com.nearsoft.androidschool.todoapp.models;
 
-public class ToDoContent {
+import java.io.Serializable;
+
+public class ToDoContent implements Serializable {
     private String title;
     private String date;
     private boolean done;
