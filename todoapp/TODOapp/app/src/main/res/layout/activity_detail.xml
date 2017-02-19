@@ -14,46 +14,78 @@
         android:padding="@dimen/activity_vertical_margin">
 
         <TextView
-            android:id="@+id/title"
+            android:id="@+id/title_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:labelFor="@+id/title_field"
+            android:text="@string/task_name" />
+
+        <EditText
+            android:id="@+id/title_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title_label"
             android:ellipsize="end"
+            android:enabled="false"
             android:lines="1"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
             tools:text="todo title will be here and if it is long AF it will be hidden" />
 
-        <TextView
+        <EditText
             android:id="@+id/date_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/title"
+            android:layout_below="@+id/title_field"
             android:layout_marginTop="10dp"
+            android:enabled="false"
             android:gravity="end"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
             tools:text="01/01/1990" />
 
         <TextView
-            android:id="@+id/notes"
+            android:id="@+id/notes_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/notes_field"
+            android:labelFor="@+id/notes_field"
+            android:text="@string/notes_label" />
+
+        <EditText
+            android:id="@+id/notes_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/date_text"
             android:layout_marginTop="16dp"
+            android:enabled="false"
             android:maxHeight="300dp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
             tools:text="notes of the todo, this is a sample text.\ncan contain end of lines\nsomething here" />
 
+
     </RelativeLayout>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/edit_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_margin="16dp"
         android:src="@drawable/ic_edit_white"
+        app:layout_anchor="@id/content"
+        app:layout_anchorGravity="bottom|right|end" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/save_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_done_white"
+        android:visibility="invisible"
         app:layout_anchor="@id/content"
         app:layout_anchorGravity="bottom|right|end" />
 

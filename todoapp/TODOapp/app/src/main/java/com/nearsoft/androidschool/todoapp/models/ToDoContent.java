@@ -16,6 +16,10 @@ public class ToDoContent implements Serializable {
         this.location = location;
     }
 
+    public ToDoContent() {
+
+    }
+
     public boolean isStarred() {
         return starred;
     }

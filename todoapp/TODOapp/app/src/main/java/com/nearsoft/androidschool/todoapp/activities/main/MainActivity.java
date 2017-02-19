@@ -1,14 +1,15 @@
 package com.nearsoft.androidschool.todoapp.activities.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.nearsoft.androidschool.todoapp.R;
+import com.nearsoft.androidschool.todoapp.activities.detail.DetailActivity;
 import com.nearsoft.androidschool.todoapp.activities.main.adapter.ToDoListAdapter;
 import com.nearsoft.androidschool.todoapp.models.ToDoContent;
 
@@ -36,7 +37,8 @@ public class MainActivity extends AppCompatActivity {
         addFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(todoRecyclerView, "this should take you to and activity to add a new task ", Snackbar.LENGTH_SHORT).show();
+                Intent intent = new Intent(view.getContext(), DetailActivity.class);
+                view.getContext().startActivity(intent);
             }
         });
     }
