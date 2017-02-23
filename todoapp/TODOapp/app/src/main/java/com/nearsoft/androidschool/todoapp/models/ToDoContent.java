@@ -1,23 +1,24 @@
 package com.nearsoft.androidschool.todoapp.models;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class ToDoContent implements Serializable {
     private String title;
-    private String date;
+    private Date date;
     private boolean done;
     private String location;
     private boolean starred;
     private String notes;
 
-    public ToDoContent(String title, String date, String location) {
+    public ToDoContent(String title, Date date, String location) {
         this.title = title;
         this.date = date;
         this.location = location;
     }
 
     public ToDoContent() {
-
+        this.date = new Date();
     }
 
     public boolean isStarred() {
@@ -36,11 +37,11 @@ public class ToDoContent implements Serializable {
         this.title = title;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

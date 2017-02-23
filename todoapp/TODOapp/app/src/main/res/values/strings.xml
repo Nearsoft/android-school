@@ -3,4 +3,5 @@
     <string name="hello_world">Hello world</string>
     <string name="task_name">Task Name:</string>
     <string name="notes_label">notes:</string>
+    <string name="date">Date</string>
 </resources>

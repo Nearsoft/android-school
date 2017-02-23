@@ -31,32 +31,26 @@
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
             tools:text="todo title will be here and if it is long AF it will be hidden" />
 
-        <EditText
-            android:id="@+id/date_text"
+        <include
+            android:id="@+id/date_view"
+            layout="@layout/date_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/title_field"
-            android:layout_marginTop="10dp"
-            android:enabled="false"
-            android:gravity="end"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-            tools:text="01/01/1990" />
+            android:layout_alignParentStart="true" />
 
         <TextView
             android:id="@+id/notes_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/notes_field"
             android:labelFor="@+id/notes_field"
-            android:text="@string/notes_label" />
+            android:text="@string/notes_label"
+            />
 
         <EditText
             android:id="@+id/notes_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/date_text"
             android:layout_marginTop="16dp"
             android:enabled="false"
             android:maxHeight="300dp"

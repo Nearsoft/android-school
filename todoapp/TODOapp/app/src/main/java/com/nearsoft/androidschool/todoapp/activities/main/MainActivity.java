@@ -14,6 +14,7 @@ import com.nearsoft.androidschool.todoapp.activities.main.adapter.ToDoListAdapte
 import com.nearsoft.androidschool.todoapp.models.ToDoContent;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -45,11 +46,11 @@ public class MainActivity extends AppCompatActivity {
 
     public List<ToDoContent> getData() {
         List<ToDoContent> data = new ArrayList<>();
-        ToDoContent first = new ToDoContent("task 1", "Today", "at Nearsoft");
+        ToDoContent first = new ToDoContent("task 1", new Date(), "at Nearsoft");
         first.setNotes("sample text, text sample, hehe hehe\nmore text, here is another text and more samples\nsampletext, stub, lalala i hate the word \"fake\"");
         data.add(first);
-        data.add(new ToDoContent("task 2", "Today", "at Nearsoft"));
-        data.add(new ToDoContent("task 3", "yesterday", "at Cafenio"));
+        data.add(new ToDoContent("task 2", new Date(), "at Nearsoft"));
+        data.add(new ToDoContent("task 3", new Date(), "at Cafenio"));
         return data;
     }
 }
