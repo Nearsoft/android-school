@@ -3,6 +3,6 @@
     https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=B8:71:D5:E8:8D:99:C7:8A:A5:4B:E3:A0:46:B0:9A:CA:63:3B:BD:B3%3Bcom.nearsoft.androidschool.todoapp.activities.map
     -->
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">
-        AIzaSyCXBBW6fT9C-K3Au0uDZhdDQ345Nij6V98
+        PLACE_YOUR_KEY_HERE
     </string>
 </resources>

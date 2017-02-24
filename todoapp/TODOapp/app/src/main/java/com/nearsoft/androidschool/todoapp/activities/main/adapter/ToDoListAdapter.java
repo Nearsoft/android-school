@@ -53,11 +53,11 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ViewHo
         TextView dateTextBox;
         CheckBox doneCheckbox;
         ImageButton mapButton;
-        Context context;
+        View view;
 
         ViewHolder(View itemView) {
             super(itemView);
-            context = itemView.getContext();
+            view = itemView;
             container = (CardView) itemView.findViewById(R.id.cardViewContainer);
             toDoNameTextBox = (TextView) itemView.findViewById(R.id.toDoText);
             dateTextBox = (TextView) itemView.findViewById(R.id.dateText);
@@ -80,9 +80,9 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ViewHo
                 Snackbar.make(mapButton, "this should hide this item when clicked maybe", Snackbar.LENGTH_SHORT).show();
             }
             if (view.getId() == R.id.mapImageButton) {
-                Intent intent = new Intent(context, MapsActivity.class);
+                Intent intent = new Intent(view.getContext(), MapsActivity.class);
                 intent.putExtra(MapsActivity.CONTENT_EXTRA, item);
-                context.startActivity(intent);
+                view.getContext().startActivity(intent);
             }
             if (view.getId() == R.id.cardViewContainer) {
                 Intent intent = new Intent(itemView.getContext(), DetailActivity.class);
