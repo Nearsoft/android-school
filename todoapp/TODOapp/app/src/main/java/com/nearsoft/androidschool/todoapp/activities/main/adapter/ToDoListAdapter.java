@@ -53,11 +53,9 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ViewHo
         TextView dateTextBox;
         CheckBox doneCheckbox;
         ImageButton mapButton;
-        View view;
 
         ViewHolder(View itemView) {
             super(itemView);
-            view = itemView;
             container = (CardView) itemView.findViewById(R.id.cardViewContainer);
             toDoNameTextBox = (TextView) itemView.findViewById(R.id.toDoText);
             dateTextBox = (TextView) itemView.findViewById(R.id.dateText);
@@ -85,9 +83,9 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ViewHo
                 view.getContext().startActivity(intent);
             }
             if (view.getId() == R.id.cardViewContainer) {
-                Intent intent = new Intent(itemView.getContext(), DetailActivity.class);
+                Intent intent = new Intent(view.getContext(), DetailActivity.class);
                 intent.putExtra(DetailActivity.EXTRA_TODO_KEY, item);
-                itemView.getContext().startActivity(intent);
+                view.getContext().startActivity(intent);
             }
         }
     }

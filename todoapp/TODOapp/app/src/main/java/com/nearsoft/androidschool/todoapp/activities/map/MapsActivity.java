@@ -1,5 +1,6 @@
 package com.nearsoft.androidschool.todoapp.activities.map;
 
+import android.location.Location;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
@@ -37,9 +38,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
 
-        LatLng latLng = new LatLng(-34, 151);
-        map.addMarker(new MarkerOptions().position(latLng).title(toDoContent.getTitle()));
-        map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+//        TODO get toDoLatLng from toDoContent variable
+        LatLng toDoLatLng = new LatLng(-34, 151);
+        map.addMarker(new MarkerOptions().position(toDoLatLng).title(toDoContent.getTitle()));
+        map.moveCamera(CameraUpdateFactory.newLatLng(toDoLatLng));
     }
 
 }
