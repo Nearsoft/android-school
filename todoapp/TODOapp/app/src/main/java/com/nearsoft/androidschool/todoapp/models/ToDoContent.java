@@ -10,11 +10,13 @@ public class ToDoContent implements Serializable {
     private String location;
     private boolean starred;
     private String notes;
+    private boolean hasDate;
 
-    public ToDoContent(String title, Date date, String location) {
+    public ToDoContent(String title, Date date, boolean hasDate, String location) {
         this.title = title;
         this.date = date;
         this.location = location;
+        this.hasDate = hasDate;
     }
 
     public ToDoContent() {
@@ -67,5 +69,13 @@ public class ToDoContent implements Serializable {
 
     public void setNotes(String notes) {
         this.notes = notes;
+    }
+
+    public boolean hasDate() {
+        return this.hasDate;
+    }
+
+    public void setHasDate(boolean hasDate) {
+        this.hasDate = hasDate;
     }
 }

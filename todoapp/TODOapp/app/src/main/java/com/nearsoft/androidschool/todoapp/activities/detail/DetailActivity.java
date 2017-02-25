@@ -7,19 +7,18 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.nearsoft.androidschool.todoapp.R;
 import com.nearsoft.androidschool.todoapp.fragment.DatePickerFragment;
 import com.nearsoft.androidschool.todoapp.models.ToDoContent;
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeFieldType;
 
+import java.text.DateFormat;
 import java.util.Date;
-
-import timber.log.Timber;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -31,6 +30,7 @@ public class DetailActivity extends AppCompatActivity {
     private TextView dateTextView;
     private FloatingActionButton editFab;
     private FloatingActionButton saveFab;
+    private Switch dateSwitch;
 
     private ToDoContent todoItem;
 
@@ -38,6 +38,7 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setViews();
+        setSwitchListener();
         populateToDoObject();
         setSaveListener();
         setEditListener();
@@ -48,19 +49,24 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
         titleEditTextView = (EditText) findViewById(R.id.title_field);
         notesEditTextView = (EditText) findViewById(R.id.notes_field);
-        dateCardView = (CardView) findViewById(R.id.date);
+        dateCardView = (CardView) findViewById(R.id.date_view);
         editFab = (FloatingActionButton) findViewById(R.id.edit_fab);
         saveFab = (FloatingActionButton) findViewById(R.id.save_fab);
         dateTextView = (TextView) dateCardView.findViewById(R.id.date_text);
+        dateSwitch = (Switch) findViewById(R.id.switch_date);
     }
 
     private void setSaveListener() {
         saveFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                saveData();
-                Snackbar.make(editFab, "Data Saved (Not saving in reality)", Snackbar.LENGTH_SHORT).show();
-                buttonViewConfig(false);
+                try {
+                    saveData();
+                    Snackbar.make(editFab, "Data Saved (Not saving in reality)", Snackbar.LENGTH_SHORT).show();
+                    buttonViewConfig(false);
+                } catch (AssertionError er) {
+                    Snackbar.make(editFab, R.string.set_date_or_change_switch_message, Snackbar.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -78,53 +84,70 @@ public class DetailActivity extends AppCompatActivity {
         dateCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                showDatePicker();
             }
         });
     }
 
-    private void showDatepicker() {
+    private void showDatePicker() {
         DatePickerFragment dialog = new DatePickerFragment();
         dialog.attachListener(new android.app.DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
-                DateTime dateTime = new DateTime(year, month + 1, dayOfMonth, 0, 0);
-                Timber.d(year + "/" + month + "/" + dayOfMonth);
-//                dateTextView.setText(dateTime.toDate().toString());
-                updateDate(dateTime.toDate());
+                Date dateTime = new Date(year, month + 1, dayOfMonth, 0, 0);
+                updateDate(dateTime);
             }
         });
         dialog.show(this.getSupportFragmentManager(), "datePicker");
     }
 
+    private void setSwitchListener() {
+        dateSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                dateCardView.setVisibility(isChecked ? View.VISIBLE : View.INVISIBLE);
+            }
+        });
+    }
+
     private void buttonViewConfig(boolean isEditClicking) {
         titleEditTextView.setEnabled(isEditClicking);
         notesEditTextView.setEnabled(isEditClicking);
+        dateCardView.setEnabled(isEditClicking);
+        dateSwitch.setEnabled(isEditClicking);
         editFab.setVisibility(isEditClicking ? View.INVISIBLE : View.VISIBLE);
         saveFab.setVisibility(isEditClicking ? View.VISIBLE : View.INVISIBLE);
     }
 
-    private void saveData() {
+    private void saveData() throws AssertionError {
 //        TODO:this method will make the saving
+        String selectedDate = dateTextView.getText().toString();
+        if (selectedDate.equals(getText(R.string.date))) {
+            throw new AssertionError(dateCardView.getClass().getSimpleName() + getString(R.string.set_date_or_change_switch_message));
+        }
         todoItem.setTitle(titleEditTextView.getText().toString());
-        todoItem.setDate(new Date(dateTextView.getText().toString()));
+        todoItem.setDate(new Date(selectedDate));
         todoItem.setNotes(notesEditTextView.getText().toString());
+        todoItem.setHasDate(dateSwitch.isChecked());
     }
 
     private void populateToDoObject() {
         try {
             todoItem = getTodo();
             displayDetail();
+            buttonViewConfig(false);
         } catch (AssertionError err) {
             todoItem = new ToDoContent();
-            buttonViewConfig(true);
         }
     }
 
     private void displayDetail() {
         titleEditTextView.setText(todoItem.getTitle());
         notesEditTextView.setText(todoItem.getNotes());
-        dateTextView.setText(todoItem.getDate().toString());
+        if (todoItem.getDate() != null) {
+            updateDate(todoItem.getDate());
+        }
+        dateSwitch.setChecked(todoItem.hasDate());
     }
 
     private ToDoContent getTodo() throws AssertionError {
@@ -136,15 +159,8 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     public void updateDate(Date date) {
-        DateTime dateTime = new DateTime(date);
-        String dateText;
-        if(dateTime.get(DateTimeFieldType.dayOfYear()) == DateTime.now().get(DateTimeFieldType.dayOfYear())) {
-            dateText = "Today";
-        } else if(dateTime.get(DateTimeFieldType.dayOfYear()) == DateTime.now().plusDays(1).get(DateTimeFieldType.dayOfYear())) {
-            dateText = "Tomorrow";
-        } else {
-            dateText = dateTime.toString("MM/dd/YYYY");
-        }
+        DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getApplicationContext());
+        String dateText = dateFormat.format(date);
         dateTextView.setText(dateText);
     }
 

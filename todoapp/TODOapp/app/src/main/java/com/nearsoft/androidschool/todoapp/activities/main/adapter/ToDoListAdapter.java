@@ -64,7 +64,9 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ViewHo
         void bindData(ToDoContent toDoItem) {
             item = toDoItem;
             toDoNameTextBox.setText(toDoItem.getTitle());
-//            dateTextBox.setText(toDoItem.getDate());
+            if (toDoItem.hasDate()) {
+                dateTextBox.setText(toDoItem.getDate().toString());
+            }
             doneCheckbox.setOnClickListener(this);
             mapButton.setOnClickListener(this);
             container.setOnClickListener(this);

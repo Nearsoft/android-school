@@ -46,11 +46,11 @@ public class MainActivity extends AppCompatActivity {
 
     public List<ToDoContent> getData() {
         List<ToDoContent> data = new ArrayList<>();
-        ToDoContent first = new ToDoContent("task 1", new Date(), "at Nearsoft");
+        ToDoContent first = new ToDoContent("task 1", new Date(), true, "at Nearsoft");
         first.setNotes("sample text, text sample, hehe hehe\nmore text, here is another text and more samples\nsampletext, stub, lalala i hate the word \"fake\"");
         data.add(first);
-        data.add(new ToDoContent("task 2", new Date(), "at Nearsoft"));
-        data.add(new ToDoContent("task 3", new Date(), "at Cafenio"));
+        data.add(new ToDoContent("task 2", null, false, "at Nearsoft"));
+        data.add(new ToDoContent("task 3", null, false, "at Cafenio"));
         return data;
     }
 }
