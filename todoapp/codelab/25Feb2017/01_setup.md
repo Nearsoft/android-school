@@ -38,3 +38,5 @@ Ya que este listo todo, deberiamos tener una estructura del proyecto muy parecid
 ![][imagen6]
 
 Listo, Android Studio deberia estar abierto en una clase llamada `MainActivity.java` listo para modificar el codigo.
+
+[\[Siguiente Paso\]](02_main_activity.md)
