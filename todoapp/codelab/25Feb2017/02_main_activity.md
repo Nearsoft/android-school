@@ -1,5 +1,7 @@
 [image]: http://i.imgur.com/SFPihLo.png
 
+[\[Paso Anterior\]](01_setup.md)
+
 # Main Activity
 El codigo que debemos tener en `MainActivity.java` debe ser el siguiente ó algo muy parecido:
 
