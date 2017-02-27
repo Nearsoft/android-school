@@ -62,3 +62,5 @@ Un **Activity** principal siempre tendrá el **IntentFilter**:
 Si corremos esta aplicación en cualquier Android device ó emulador, deberemos ver lo siguiente:
 
 ![][image]
+
+[\[Siguiente Paso\]](03_main_layout.md)
