@@ -30,3 +30,5 @@ Lo que vimos anteriormente en la pantalla, se puede ver de la siguiente manera e
 Este codigo XML es el que tiene toda la definicion de las vistas que estaremos utilizando, en el dia 3 de Android School veremos mas a detalle todo esto, de momento, podemos jugar con los diferentes valores que tiene este TextView.
 
 Esto lo podemos encontrar en el archivo: [/todoapp/TODOapp/app/src/main/res/layout/activity_main.xml](/todoapp/TODOapp/app/src/main/res/layout/activity_main.xml)
+
+[\[Siguiente Paso\]](04_github.md)
