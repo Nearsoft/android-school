@@ -1,21 +1,28 @@
 package com.nearsoft.androidschool.todoapp.models;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class ToDoContent implements Serializable {
     private String title;
-    private String date;
+    private Date date;
     private boolean done;
     private double lat;
     private double lng;
     private boolean starred;
     private String notes;
+    private boolean hasDate;
 
-    public ToDoContent(String title, String date, double lat, double lng) {
+    public ToDoContent(String title, Date date, boolean hasDate, double lat, double lng) {
         this.title = title;
         this.date = date;
+        this.hasDate = hasDate;
         this.lat = lat;
         this.lng = lng;
+    }
+
+    public ToDoContent() {
+        this.date = new Date();
     }
 
     public boolean isStarred() {
@@ -34,11 +41,11 @@ public class ToDoContent implements Serializable {
         this.title = title;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -56,6 +63,14 @@ public class ToDoContent implements Serializable {
 
     public void setNotes(String notes) {
         this.notes = notes;
+    }
+
+    public boolean hasDate() {
+        return this.hasDate;
+    }
+
+    public void setHasDate(boolean hasDate) {
+        this.hasDate = hasDate;
     }
 
     public double getLat() {
