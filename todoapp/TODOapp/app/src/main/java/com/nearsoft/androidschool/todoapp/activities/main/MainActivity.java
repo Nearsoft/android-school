@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.nearsoft.androidschool.todoapp.R;
 import com.nearsoft.androidschool.todoapp.activities.main.adapter.ToDoListAdapter;
 import com.nearsoft.androidschool.todoapp.models.ToDoContent;
@@ -43,11 +44,11 @@ public class MainActivity extends AppCompatActivity {
 
     public List<ToDoContent> getData() {
         List<ToDoContent> data = new ArrayList<>();
-        ToDoContent first = new ToDoContent("task 1", "Today", "at Nearsoft");
+        ToDoContent first = new ToDoContent("task 1", "Today", 29.09747, -111.02198);
         first.setNotes("sample text, text sample, hehe hehe\nmore text, here is another text and more samples\nsampletext, stub, lalala i hate the word \"fake\"");
         data.add(first);
-        data.add(new ToDoContent("task 2", "Today", "at Nearsoft"));
-        data.add(new ToDoContent("task 3", "yesterday", "at Cafenio"));
+        data.add(new ToDoContent("task 2", "Today", 29.09747, -111.02198));
+        data.add(new ToDoContent("task 3", "yesterday", 29.09747, -111.02198));
         return data;
     }
 }
