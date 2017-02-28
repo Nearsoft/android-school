@@ -1,8 +1,7 @@
 package com.nearsoft.androidschool.todoapp.activities.map;
 
-import android.location.Location;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -18,13 +17,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public static final String CONTENT_EXTRA = "TODO_CONTENT";
     private GoogleMap map;
     private ToDoContent toDoContent;
+    private final float TWO_HUNDRED_MTS_ZOOM = 15;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
-        if(getIntent().hasExtra(CONTENT_EXTRA)){
+        if (getIntent().hasExtra(CONTENT_EXTRA)) {
             toDoContent = (ToDoContent) getIntent().getExtras().getSerializable(CONTENT_EXTRA);
         }
 
@@ -33,15 +33,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
     }
 
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
-
-//        TODO get toDoLatLng from toDoContent variable
-        LatLng toDoLatLng = new LatLng(-34, 151);
+        LatLng toDoLatLng = new LatLng(toDoContent.getLat(), toDoContent.getLng());
         map.addMarker(new MarkerOptions().position(toDoLatLng).title(toDoContent.getTitle()));
-        map.moveCamera(CameraUpdateFactory.newLatLng(toDoLatLng));
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(toDoLatLng, TWO_HUNDRED_MTS_ZOOM));
     }
 
 }

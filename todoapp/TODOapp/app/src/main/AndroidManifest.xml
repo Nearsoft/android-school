@@ -22,7 +22,7 @@
             android:parentActivityName=".activities.main.MainActivity" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
+            android:value="@string/GOOGLE_MAPS_KEY" />
 
         <activity
             android:name=".activities.map.MapsActivity"
