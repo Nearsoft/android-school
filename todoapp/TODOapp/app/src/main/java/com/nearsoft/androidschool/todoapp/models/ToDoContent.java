@@ -7,16 +7,18 @@ public class ToDoContent implements Serializable {
     private String title;
     private Date date;
     private boolean done;
-    private String location;
+    private double lat;
+    private double lng;
     private boolean starred;
     private String notes;
     private boolean hasDate;
 
-    public ToDoContent(String title, Date date, boolean hasDate, String location) {
+    public ToDoContent(String title, Date date, boolean hasDate, double lat, double lng) {
         this.title = title;
         this.date = date;
-        this.location = location;
         this.hasDate = hasDate;
+        this.lat = lat;
+        this.lng = lng;
     }
 
     public ToDoContent() {
@@ -55,14 +57,6 @@ public class ToDoContent implements Serializable {
         this.done = done;
     }
 
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
     public String getNotes() {
         return notes;
     }
@@ -77,5 +71,21 @@ public class ToDoContent implements Serializable {
 
     public void setHasDate(boolean hasDate) {
         this.hasDate = hasDate;
+    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    public double getLng() {
+        return lng;
+    }
+
+    public void setLng(double lng) {
+        this.lng = lng;
     }
 }
