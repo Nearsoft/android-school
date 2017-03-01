@@ -1,11 +1,17 @@
 package com.nearsoft.androidschool.todoapp.activities.detail;
 
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
@@ -31,8 +37,9 @@ public class DetailActivity extends AppCompatActivity {
     private FloatingActionButton editFab;
     private FloatingActionButton saveFab;
     private Switch dateSwitch;
-
+    private Switch locationSwitch;
     private ToDoContent todoItem;
+    private LocationManager locationManager;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,6 +50,7 @@ public class DetailActivity extends AppCompatActivity {
         setSaveListener();
         setEditListener();
         setDateListener();
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
     }
 
     private void setViews() {
@@ -54,6 +62,7 @@ public class DetailActivity extends AppCompatActivity {
         saveFab = (FloatingActionButton) findViewById(R.id.save_fab);
         dateTextView = (TextView) dateCardView.findViewById(R.id.date_text);
         dateSwitch = (Switch) findViewById(R.id.switch_date);
+        locationSwitch = (Switch) findViewById(R.id.switch_location);
     }
 
     private void setSaveListener() {
@@ -108,6 +117,17 @@ public class DetailActivity extends AppCompatActivity {
                 dateCardView.setVisibility(isChecked ? View.VISIBLE : View.INVISIBLE);
             }
         });
+        locationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) && isChecked) {
+                    showLocationNeededDialog();
+                } else {
+                    //TODO GET LOCATION
+                    Log.d(DetailActivity.class.getSimpleName(), "yas");
+                }
+            }
+        });
     }
 
     private void buttonViewConfig(boolean isEditClicking) {
@@ -115,6 +135,7 @@ public class DetailActivity extends AppCompatActivity {
         notesEditTextView.setEnabled(isEditClicking);
         dateCardView.setEnabled(isEditClicking);
         dateSwitch.setEnabled(isEditClicking);
+        locationSwitch.setEnabled(isEditClicking);
         editFab.setVisibility(isEditClicking ? View.INVISIBLE : View.VISIBLE);
         saveFab.setVisibility(isEditClicking ? View.VISIBLE : View.INVISIBLE);
     }
@@ -162,6 +183,31 @@ public class DetailActivity extends AppCompatActivity {
         DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getApplicationContext());
         String dateText = dateFormat.format(date);
         dateTextView.setText(dateText);
+    }
+
+    private void showLocationNeededDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this)
+                .setTitle("Location enabled Needed")
+                .setMessage("Do you which to go to the settings to enable Location settings?")
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        showLocationSettings();
+                    }
+                })
+                .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        locationSwitch.setChecked(false);
+                    }
+                });
+        builder.create()
+                .show();
+    }
+
+    private void showLocationSettings() {
+        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+        startActivity(intent);
     }
 
 }
