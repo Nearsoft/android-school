@@ -126,7 +126,7 @@ public class DetailActivity extends AppCompatActivity {
         locationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if(isChecked){
+                if (isChecked) {
                     if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
                         getLocationFromService();
                     } else {
@@ -211,8 +211,8 @@ public class DetailActivity extends AppCompatActivity {
 
     private void showLocationNeededDialog() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this)
-                .setTitle("Location enabled required")
-                .setMessage("Do you wish to go to the settings to enable Location settings?")
+                .setTitle(R.string.location_dialog_title)
+                .setMessage(R.string.location_dialog_message)
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
