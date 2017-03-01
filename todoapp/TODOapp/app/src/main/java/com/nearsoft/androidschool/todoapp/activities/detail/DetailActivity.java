@@ -1,17 +1,21 @@
 package com.nearsoft.androidschool.todoapp.activities.detail;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
@@ -40,6 +44,7 @@ public class DetailActivity extends AppCompatActivity {
     private Switch locationSwitch;
     private ToDoContent todoItem;
     private LocationManager locationManager;
+    private static final int REQUEST_LOCATION_PERMISSION = 1;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -120,14 +125,30 @@ public class DetailActivity extends AppCompatActivity {
         locationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) && isChecked) {
+                if (!locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER) && isChecked) {
                     showLocationNeededDialog();
                 } else {
-                    //TODO GET LOCATION
-                    Log.d(DetailActivity.class.getSimpleName(), "yas");
+                    getLocationFromService();
                 }
             }
         });
+    }
+
+    private void getLocationFromService() {
+        if (ActivityCompat.checkSelfPermission(DetailActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            saveLocationInToDo(location);
+        } else {
+            ActivityCompat.requestPermissions(DetailActivity.this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION_PERMISSION);
+        }
+    }
+
+    private void saveLocationInToDo(Location location) {
+        if (location != null) {
+            todoItem.setLat(location.getLatitude());
+            todoItem.setLng(location.getLongitude());
+        }
     }
 
     private void buttonViewConfig(boolean isEditClicking) {
@@ -210,4 +231,12 @@ public class DetailActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == REQUEST_LOCATION_PERMISSION && grantResults[0] == PackageManager.PERMISSION_DENIED) {
+            getLocationFromService();
+        } else {
+            locationSwitch.setChecked(false);
+        }
+    }
 }
