@@ -44,6 +44,7 @@ public class DetailActivity extends AppCompatActivity {
     private Switch locationSwitch;
     private ToDoContent todoItem;
     private LocationManager locationManager;
+    private static final int REQUEST_LOCATION_ENABLED = 0;
     private static final int REQUEST_LOCATION_PERMISSION = 1;
 
     @Override
@@ -125,10 +126,12 @@ public class DetailActivity extends AppCompatActivity {
         locationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if (!locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER) && isChecked) {
-                    showLocationNeededDialog();
-                } else {
-                    getLocationFromService();
+                if(isChecked){
+                    if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                        getLocationFromService();
+                    } else {
+                        showLocationNeededDialog();
+                    }
                 }
             }
         });
@@ -136,7 +139,7 @@ public class DetailActivity extends AppCompatActivity {
 
     private void getLocationFromService() {
         if (ActivityCompat.checkSelfPermission(DetailActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             saveLocationInToDo(location);
         } else {
             ActivityCompat.requestPermissions(DetailActivity.this,
@@ -207,9 +210,9 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void showLocationNeededDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this)
-                .setTitle("Location enabled Needed")
-                .setMessage("Do you which to go to the settings to enable Location settings?")
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this)
+                .setTitle("Location enabled required")
+                .setMessage("Do you wish to go to the settings to enable Location settings?")
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -228,7 +231,17 @@ public class DetailActivity extends AppCompatActivity {
 
     private void showLocationSettings() {
         Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-        startActivity(intent);
+        startActivityForResult(intent, REQUEST_LOCATION_ENABLED);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_LOCATION_ENABLED
+                && locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            getLocationFromService();
+        } else {
+            locationSwitch.setChecked(false);
+        }
     }
 
     @Override
