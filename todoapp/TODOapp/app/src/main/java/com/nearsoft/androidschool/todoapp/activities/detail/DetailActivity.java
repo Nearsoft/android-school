@@ -132,6 +132,9 @@ public class DetailActivity extends AppCompatActivity {
                     } else {
                         showLocationNeededDialog();
                     }
+                }else{
+                    todoItem.setLat(0.0d);
+                    todoItem.setLng(0.0d);
                 }
             }
         });
