@@ -64,7 +64,7 @@ public class DetailActivity extends AppCompatActivity {
                     saveData();
                     Snackbar.make(editFab, "Data Saved (Not saving in reality)", Snackbar.LENGTH_SHORT).show();
                     buttonViewConfig(false);
-                } catch (AssertionError er) {
+                } catch (Exception e) {
                     Snackbar.make(editFab, R.string.set_date_or_change_switch_message, Snackbar.LENGTH_SHORT).show();
                 }
             }
@@ -119,11 +119,11 @@ public class DetailActivity extends AppCompatActivity {
         saveFab.setVisibility(isEditClicking ? View.VISIBLE : View.INVISIBLE);
     }
 
-    private void saveData() throws AssertionError {
+    private void saveData() throws Exception {
 //        TODO:this method will make the saving
         String selectedDate = dateTextView.getText().toString();
         if (selectedDate.equals(getText(R.string.date))) {
-            throw new AssertionError(dateCardView.getClass().getSimpleName() + getString(R.string.set_date_or_change_switch_message));
+            throw new Exception(dateCardView.getClass().getSimpleName() + getString(R.string.set_date_or_change_switch_message));
         }
         todoItem.setTitle(titleEditTextView.getText().toString());
         todoItem.setDate(new Date(selectedDate));
@@ -136,7 +136,7 @@ public class DetailActivity extends AppCompatActivity {
             todoItem = getTodo();
             displayDetail();
             buttonViewConfig(false);
-        } catch (AssertionError err) {
+        } catch (Exception e) {
             todoItem = new ToDoContent();
         }
     }
@@ -150,12 +150,12 @@ public class DetailActivity extends AppCompatActivity {
         dateSwitch.setChecked(todoItem.hasDate());
     }
 
-    private ToDoContent getTodo() throws AssertionError {
+    private ToDoContent getTodo() throws Exception {
         Bundle extras = getIntent().getExtras();
         if (extras != null && extras.containsKey(EXTRA_TODO_KEY)) {
             return (ToDoContent) extras.getSerializable(EXTRA_TODO_KEY);
         }
-        throw new AssertionError(getClass().getSimpleName() + " intent extras should contain an item");
+        throw new Exception(getClass().getSimpleName() + " intent extras should contain an item");
     }
 
     public void updateDate(Date date) {

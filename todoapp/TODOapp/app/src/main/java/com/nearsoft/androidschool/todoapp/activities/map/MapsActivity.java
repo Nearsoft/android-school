@@ -10,11 +10,11 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.nearsoft.androidschool.todoapp.R;
+import com.nearsoft.androidschool.todoapp.activities.detail.DetailActivity;
 import com.nearsoft.androidschool.todoapp.models.ToDoContent;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
-    public static final String CONTENT_EXTRA = "TODO_CONTENT";
     private GoogleMap map;
     private ToDoContent toDoContent;
     private final float TWO_HUNDRED_MTS_ZOOM = 15;
@@ -24,8 +24,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
-        if (getIntent().hasExtra(CONTENT_EXTRA)) {
-            toDoContent = (ToDoContent) getIntent().getExtras().getSerializable(CONTENT_EXTRA);
+        if (getIntent().hasExtra(DetailActivity.EXTRA_TODO_KEY)) {
+            toDoContent = (ToDoContent) getIntent().getExtras()
+                    .getSerializable(DetailActivity.EXTRA_TODO_KEY);
         }
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
