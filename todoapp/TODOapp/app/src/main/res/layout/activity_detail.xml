@@ -32,17 +32,6 @@
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
             tools:text="todo title will be here and if it is long AF it will be hidden" />
 
-        <!--this is a death line or a reminder, i don't know-->
-
-        <include
-            android:id="@+id/date_view"
-            layout="@layout/date_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@+id/title_field"
-            android:layout_marginTop="32dp" />
-
         <Switch
             android:id="@+id/switch_date"
             android:layout_width="wrap_content"
@@ -52,13 +41,23 @@
             android:checked="true"
             android:text="@string/set_a_date" />
 
+        <Switch
+            android:id="@+id/switch_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/switch_date"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="16dp"
+            android:checked="false"
+            android:text="@string/use_location" />
+
         <TextView
             android:id="@+id/notes_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/date_view"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="64dp"
             android:labelFor="@+id/notes_field"
             android:text="@string/notes_label" />
 
@@ -72,6 +71,15 @@
             android:maxHeight="300dp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
             tools:text="notes of the todo, this is a sample text.\ncan contain end of lines\nsomething here" />
+
+        <include
+            android:id="@+id/date_view"
+            layout="@layout/date_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_below="@+id/title_field"
+            android:layout_alignParentEnd="true" />
 
     </RelativeLayout>
 
