@@ -72,6 +72,10 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ViewHo
             doneCheckbox.setOnClickListener(this);
             mapButton.setOnClickListener(this);
             container.setOnClickListener(this);
+            if(item.getLat() == 0.0d && item.getLng() == 0.0d){
+                mapButton.setImageResource(R.drawable.ic_pin_disabled);
+                mapButton.setEnabled(false);
+            }
         }
 
         @Override
@@ -81,7 +85,7 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ViewHo
             }
             if (view.getId() == R.id.mapImageButton) {
                 Intent intent = new Intent(view.getContext(), MapsActivity.class);
-                intent.putExtra(MapsActivity.CONTENT_EXTRA, item);
+                intent.putExtra(DetailActivity.EXTRA_TODO_KEY, item);
                 view.getContext().startActivity(intent);
             }
             if (view.getId() == R.id.cardViewContainer) {

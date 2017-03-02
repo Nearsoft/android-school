@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
     public List<ToDoContent> getData() {
         List<ToDoContent> data = new ArrayList<>();
-        ToDoContent first = new ToDoContent("task 1", new Date(), true, 29.09747, -111.02198);
+        ToDoContent first = new ToDoContent("task 1", new Date(), true);
         first.setNotes("sample text, text sample, hehe hehe\nmore text, here is another text and more samples\nsampletext, stub, lalala i hate the word \"fake\"");
         data.add(first);
         data.add(new ToDoContent("task 2", null, false,  29.09747, -111.02198));
