@@ -75,13 +75,9 @@ public class DetailActivity extends AppCompatActivity {
         saveFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
-                    saveData();
-                    Snackbar.make(editFab, "Data Saved (Not saving in reality)", Snackbar.LENGTH_SHORT).show();
-                    buttonViewConfig(false);
-                } catch (Exception e) {
-                    Snackbar.make(editFab, R.string.set_date_or_change_switch_message, Snackbar.LENGTH_SHORT).show();
-                }
+                saveData();
+                Snackbar.make(editFab, "Data Saved (Not saving in reality)", Snackbar.LENGTH_SHORT).show();
+                enableToDoViewEdition(false);
             }
         });
     }
@@ -90,7 +86,7 @@ public class DetailActivity extends AppCompatActivity {
         editFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                buttonViewConfig(true);
+                enableToDoViewEdition(true);
             }
         });
     }
@@ -132,7 +128,7 @@ public class DetailActivity extends AppCompatActivity {
                     } else {
                         showLocationNeededDialog();
                     }
-                }else{
+                } else {
                     todoItem.setLat(0.0d);
                     todoItem.setLng(0.0d);
                 }
@@ -157,7 +153,7 @@ public class DetailActivity extends AppCompatActivity {
         }
     }
 
-    private void buttonViewConfig(boolean isEditClicking) {
+    private void enableToDoViewEdition(boolean isEditClicking) {
         titleEditTextView.setEnabled(isEditClicking);
         notesEditTextView.setEnabled(isEditClicking);
         dateCardView.setEnabled(isEditClicking);
@@ -167,11 +163,11 @@ public class DetailActivity extends AppCompatActivity {
         saveFab.setVisibility(isEditClicking ? View.VISIBLE : View.INVISIBLE);
     }
 
-    private void saveData() throws Exception {
-//        TODO:this method will make the saving
+    private void saveData() {
         String selectedDate = dateTextView.getText().toString();
         if (selectedDate.equals(getText(R.string.date))) {
-            throw new Exception(dateCardView.getClass().getSimpleName() + getString(R.string.set_date_or_change_switch_message));
+            Snackbar.make(saveFab, R.string.set_date_or_change_switch_message, Snackbar.LENGTH_LONG);
+            return;
         }
         todoItem.setTitle(titleEditTextView.getText().toString());
         todoItem.setDate(new Date(selectedDate));
@@ -180,13 +176,8 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void populateToDoObject() {
-        try {
-            todoItem = getTodo();
-            displayDetail();
-            buttonViewConfig(false);
-        } catch (Exception e) {
-            todoItem = new ToDoContent();
-        }
+        todoItem = getTodo();
+        displayDetail();
     }
 
     private void displayDetail() {
@@ -198,12 +189,14 @@ public class DetailActivity extends AppCompatActivity {
         dateSwitch.setChecked(todoItem.hasDate());
     }
 
-    private ToDoContent getTodo() throws Exception {
+    private ToDoContent getTodo() {
         Bundle extras = getIntent().getExtras();
         if (extras != null && extras.containsKey(EXTRA_TODO_KEY)) {
+            enableToDoViewEdition(false);
             return (ToDoContent) extras.getSerializable(EXTRA_TODO_KEY);
         }
-        throw new Exception(getClass().getSimpleName() + " intent extras should contain an item");
+        enableToDoViewEdition(true);
+        return new ToDoContent();
     }
 
     public void updateDate(Date date) {
