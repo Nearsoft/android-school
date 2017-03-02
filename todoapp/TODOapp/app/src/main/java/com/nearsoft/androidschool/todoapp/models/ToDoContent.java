@@ -21,6 +21,12 @@ public class ToDoContent implements Serializable {
         this.lng = lng;
     }
 
+    public ToDoContent(String title, Date date, boolean hasDate) {
+        this.title = title;
+        this.date = date;
+        this.hasDate = hasDate;
+    }
+
     public ToDoContent() {
         this.date = new Date();
     }

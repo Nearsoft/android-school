@@ -72,6 +72,10 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ViewHo
             doneCheckbox.setOnClickListener(this);
             mapButton.setOnClickListener(this);
             container.setOnClickListener(this);
+            if(item.getLat() == 0.0d && item.getLng() == 0.0d){
+                mapButton.setImageResource(R.drawable.ic_pin_disabled);
+                mapButton.setEnabled(false);
+            }
         }
 
         @Override
