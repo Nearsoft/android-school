@@ -26,7 +26,8 @@
 
         <activity
             android:name=".activities.map.MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+            android:label="@string/title_activity_maps"/>
+        <receiver android:name=".activities.notification.NotificationPublisher"/>
     </application>
 
 </manifest>

@@ -8,6 +8,7 @@
     <string name="set_date_or_change_switch_message">You have to select a valid date or turn off the switch</string>
     <string name="title_activity_maps">Map</string>
     <string name="use_location">use current location</string>
+    <string name="use_notification">Notify me!</string>
     <string name="location_dialog_title">Location enabled required</string>
     <string name="location_dialog_message">Do you wish to go to the settings to enable Location settings?</string>
 </resources>

@@ -8,7 +8,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.google.android.gms.maps.model.LatLng;
 import com.nearsoft.androidschool.todoapp.R;
 import com.nearsoft.androidschool.todoapp.activities.detail.DetailActivity;
 import com.nearsoft.androidschool.todoapp.activities.main.adapter.ToDoListAdapter;
@@ -47,11 +46,12 @@ public class MainActivity extends AppCompatActivity {
 
     public List<ToDoContent> getData() {
         List<ToDoContent> data = new ArrayList<>();
+        long alarmTime = 10000;
         ToDoContent first = new ToDoContent("task 1", new Date(), true);
         first.setNotes("sample text, text sample, hehe hehe\nmore text, here is another text and more samples\nsampletext, stub, lalala i hate the word \"fake\"");
         data.add(first);
-        data.add(new ToDoContent("task 2", null, false,  29.09747, -111.02198));
-        data.add(new ToDoContent("task 3", null, false, 29.09747, -111.02198));
+        data.add(new ToDoContent("task 2", null, false, 29.09747, -111.02198, false));
+        data.add(new ToDoContent("task 3", new Date() , false, 29.09747, -111.02198, true));
         return data;
     }
 }
