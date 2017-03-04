@@ -12,15 +12,15 @@ En este codeLab crearemos una nueva activity para ver los datos de nuestras ToDo
 
 nombrarla detail
 
-<img src="http://i.imgur.com/BF69wFe.png"
+<img src="http://i.imgur.com/BF69wFe.png">
 
 2.- Crear activity bajo el nuevo paquete **detail** 
 
-<img src="http://i.imgur.com/8V1Fa3F.png"
+<img src="http://i.imgur.com/8V1Fa3F.png">
 
 nombrarla **DetailActivity**. Activa la opcion de **Genarate Layout File** y **Backwards Compatibility**.
 
-<img src="http://i.imgur.com/mrlppCS.png"
+<img src="http://i.imgur.com/mrlppCS.png">
 
 3- Dentro de ToDoListAdapter dentro de la clase ViewHolder agrega una variable para guardar el ToDo llamada **item**:
 
@@ -71,11 +71,11 @@ dentro de **onClick** en la clase **ViewHolder** agregamos el siguiente código 
 6.- crea un nuevo archivo xml bajo el paquete **layout** que vamos a utilizar para mostrar un CardView que contendrá la fecha del ToDo
 
 
-<img src="http://i.imgur.com/YcOltWX.png"
+<img src="http://i.imgur.com/YcOltWX.png">
 
 nombralo **date_layout.xml** 
 
-<img src="http://i.imgur.com/CewiJM9.png"
+<img src="http://i.imgur.com/CewiJM9.png">
 
 modifica **date_layout.xml** para que contenga el siguiente codigo:
 ```
@@ -329,16 +329,16 @@ Con esto inhabilitamos la edición de las views o la habilitamos.
 
 11.- Para elegir la fecha en nuestro ToDo necesitamos mostrar un DatePicker por lo que declararemos el siguiente método **showDatePicker()**. para el DatePicker necesitamos un dialogFragment. Crea un nuevo paquete debajo de **todoapp**(al mismo nivel de **activities** y **models**. Llámalo **fragment**:
 
-<img src="http://i.imgur.com/6oJ1XJY.png"
+<img src="http://i.imgur.com/6oJ1XJY.png">
 
 Dentro del paquete **fragment**  crea un Fragment vacío
 
 
-<img src="http://i.imgur.com/qv6WkEE.png"
+<img src="http://i.imgur.com/qv6WkEE.png">
 
 Llamalo **DatePickerFragment** no incluyes ninguna de las opciones:
 
-<img src="http://i.imgur.com/2vj4KjV.png"
+<img src="http://i.imgur.com/2vj4KjV.png">
 
 Copia el siguiente código en **DatePickerFragment:**
 
