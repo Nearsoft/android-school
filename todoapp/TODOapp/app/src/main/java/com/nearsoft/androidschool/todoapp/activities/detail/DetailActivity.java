@@ -268,8 +268,8 @@ public class DetailActivity extends AppCompatActivity {
 
     public void prepareNotification(Notification notification, Date date){
         Intent notificationIntent = new Intent(this, NotificationPublisher.class);
-        notificationIntent.putExtra("notification id", 1);
-        notificationIntent.putExtra("notification", notification);
+        notificationIntent.putExtra(NotificationPublisher.NOTIFICATION_ID, 1);
+        notificationIntent.putExtra(NotificationPublisher.NOTIFICATION, notification);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         long remainingMillis = SystemClock.elapsedRealtime() + date.getTime();
