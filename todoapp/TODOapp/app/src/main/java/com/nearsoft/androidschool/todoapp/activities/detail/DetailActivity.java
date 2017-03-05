@@ -1,12 +1,17 @@
 package com.nearsoft.androidschool.todoapp.activities.detail;
 
 import android.Manifest;
+import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -24,6 +29,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.nearsoft.androidschool.todoapp.R;
+import com.nearsoft.androidschool.todoapp.activities.notification.NotificationPublisher;
 import com.nearsoft.androidschool.todoapp.fragment.DatePickerFragment;
 import com.nearsoft.androidschool.todoapp.models.ToDoContent;
 
@@ -42,6 +48,7 @@ public class DetailActivity extends AppCompatActivity {
     private FloatingActionButton saveFab;
     private Switch dateSwitch;
     private Switch locationSwitch;
+    private Switch notificationSwitch;
     private ToDoContent todoItem;
     private LocationManager locationManager;
     private static final int REQUEST_LOCATION_ENABLED = 0;
@@ -69,6 +76,7 @@ public class DetailActivity extends AppCompatActivity {
         dateTextView = (TextView) dateCardView.findViewById(R.id.date_text);
         dateSwitch = (Switch) findViewById(R.id.switch_date);
         locationSwitch = (Switch) findViewById(R.id.switch_location);
+        notificationSwitch = (Switch) findViewById(R.id.switch_notification);
     }
 
     private void setSaveListener() {
@@ -134,6 +142,14 @@ public class DetailActivity extends AppCompatActivity {
                 }
             }
         });
+        notificationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    prepareNotification(getNotification(todoItem),todoItem.getDate());
+                }
+            }
+        });
     }
 
     private void getLocationFromService() {
@@ -159,6 +175,7 @@ public class DetailActivity extends AppCompatActivity {
         dateCardView.setEnabled(isEditClicking);
         dateSwitch.setEnabled(isEditClicking);
         locationSwitch.setEnabled(isEditClicking);
+        notificationSwitch.setEnabled(isEditClicking);
         editFab.setVisibility(isEditClicking ? View.INVISIBLE : View.VISIBLE);
         saveFab.setVisibility(isEditClicking ? View.VISIBLE : View.INVISIBLE);
     }
@@ -247,5 +264,24 @@ public class DetailActivity extends AppCompatActivity {
         } else {
             locationSwitch.setChecked(false);
         }
+    }
+
+    public void prepareNotification(Notification notification, Date date){
+        Intent notificationIntent = new Intent(this, NotificationPublisher.class);
+        notificationIntent.putExtra(NotificationPublisher.NOTIFICATION_ID, 1);
+        notificationIntent.putExtra(NotificationPublisher.NOTIFICATION, notification);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        long remainingMillis = SystemClock.elapsedRealtime() + date.getTime();
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, remainingMillis ,pendingIntent);
+    }
+
+    public Notification getNotification(ToDoContent todoItem){
+        Notification.Builder builder = new Notification.Builder(this);
+        builder.setContentTitle(todoItem.getTitle())
+                .setContentText(todoItem.getDate().toString())
+                .setSmallIcon(R.drawable.ic_event_note_black);
+        return builder.build();
     }
 }

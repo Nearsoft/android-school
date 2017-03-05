@@ -51,13 +51,23 @@
             android:checked="false"
             android:text="@string/use_location" />
 
+        <Switch
+            android:id="@+id/switch_notification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/switch_location"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="16dp"
+            android:checked="false"
+            android:text="@string/use_notification" />
+
         <TextView
             android:id="@+id/notes_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/date_view"
-            android:layout_marginTop="64dp"
+            android:layout_marginTop="95dp"
             android:labelFor="@+id/notes_field"
             android:text="@string/notes_label" />
 
