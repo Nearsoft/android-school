@@ -1,3 +1,4 @@
+
 Add maps code lab
 ===============
 
@@ -27,7 +28,23 @@ compile 'com.google.android.gms:play-services-maps:10.2.0'
 ``` 
 Ya que no ocupamos los otros servicios de google mas que los mapas.
 
-3- entra a **google_maps_api.xml** sigue los pasos que están escritos para obtener una google_api_key, una vez obtenida copia y pegala en donde dice YOUR_KEY_HERE. 
+3- haz log-in en https://console.developers.google.com/ después entra a **google_maps_api.xml** copia y pega la URL mas larga que se genero
+
+<img src="http://i.imgur.com/mUV2qzJ.png">
+
+crea un proyecto nuevo 
+
+<img src="http://i.imgur.com/G2mF8Gc.png">
+
+crea una clave de API 
+
+<img src="http://i.imgur.com/XzxHbNL.png">
+
+Registra tu clave, dale un **Nombre** y guardalo
+
+<img src="http://i.imgur.com/BHj3x75.png">
+
+una vez obtenida tu clave copiala a **google_maps_api.xml** y pegala en donde dice YOUR_KEY_HERE. 
 
 4- Ahora como llegamos a MapsActivity? muy simple modifiquemos **ToDoListAdapter** para que cuando presionemos el ImageButton nos lleve a MapsActivity:
 ``` java
