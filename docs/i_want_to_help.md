@@ -21,11 +21,11 @@ If you want to create a Code lab please do the following:
 0. Create an [issue](https://github.com/Nearsoft/androidschool/issues) in Github for the proposal.
 2. Create your own branch (or fork the project)
 2. Add a directory in the corresponding event
- - If there is no event for your idea/app please create it.
+    - If there is no event for your idea/app please create it.
 3. Add a subdirectory for the code lab named: `codelab`
 4. Use an ordered way to categorize your excercises, example: `25Feb2017` or `day_one`
 5. Inside of each day, add different markdown files per topic.
- - Try to not add *everything* in a **single file**, try to explain it. - [Example](/2017/feb_event/todoapp/codelab/25Feb2017/01_setup.md)
+    - Try to not add *everything* in a **single file**, try to explain it. - [Example](/2017/feb_event/todoapp/codelab/25Feb2017/01_setup.md)
 6. Create a Pull Request to master and tag someone from the team.
 
 **BTW**: Language does matter, use spanish or english, do not mix the code lab, if
