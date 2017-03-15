@@ -1,4 +1,4 @@
-#I want to be on Android School development team
+# I want to be on Android School development team
 >Create an issue and we will review it.
 
 If you are a Nearsoft employee that wants to join the Android School development & organization team, please create an issue with the following:
