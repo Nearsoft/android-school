@@ -1,8 +1,7 @@
 # I Want To Help Android School
 >Yeah, I want to stop war from the world.
 
-That's cool, you are welcome to help in everything you can, if you are from the
-Nearsoft team, it is perfect, you can do almost everything:
+That's cool, you are welcome to help in everything you can, it does not matter if you are a Nearsoft employee or not.
 
 **These are a few things that you can do to help us:**
 
