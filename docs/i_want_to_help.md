@@ -78,3 +78,6 @@ You can do a lot of things in order to help us here:
 
 # How not to help
 Say that you want to help and that's it.
+
+# Nearsoft Employees
+[Read this] (docs/i_want_to_be_part_of_the_team.md)
