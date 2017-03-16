@@ -1,83 +1,56 @@
-# I Want To Help Android School
->Yeah, I want to stop war from the world.
+# I want to help
 
-That's cool, you are welcome to help in everything you can, it does not matter if you are a Nearsoft employee or not.
+We welcome all the help we can get. Here are a few way in which you can help.
 
-**These are a few things that you can do to help us:**
+## Improve our Code Labs or create new ones
 
-1. Code Labs
-2. Propose new simple-app ideas for future a class
-3. Give a talk!
-4. Help us with the organization (logistics)
-5. Improve this document
+Code labs are small ordered exercises that assistants have to complete over the 6 sessions.
 
-# How to really help
-## Improve our Code Labs or create a new one
-Code labs are small ordered exercises that assistants have to complete over the
-6 sessions.
+If you want to create a new one:
 
-If you want to create a Code lab please do the following:
+1. Create an [issue](https://github.com/Nearsoft/androidschool/issues) with your proposal (for discussion)
+2. Fork the repository and create a new branch
+3. Add a new folder to the corresponding event. If there is no event for your idea/app create it.
+4. Add a subdirectory for the code lab named: `codelab`
+5. Use an ordered way to categorize your exercises, example: `25Feb2017` or `day_one`
+6. Inside of each day, add one Markdown file per topic like in this [example](/2017/feb_event/todoapp/codelab/25Feb2017/01_setup.md)
+7. Create a pull request to the `master` branch and tag someone from the team
 
-0. Create an [issue](https://github.com/Nearsoft/androidschool/issues) in Github for the proposal.
-2. Create your own branch (or fork the project)
-2. Add a directory in the corresponding event
-    - If there is no event for your idea/app please create it.
-3. Add a subdirectory for the code lab named: `codelab`
-4. Use an ordered way to categorize your excercises, example: `25Feb2017` or `day_one`
-5. Inside of each day, add different markdown files per topic.
-    - Try to not add *everything* in a **single file**, try to explain it. - [Example](/2017/feb_event/todoapp/codelab/25Feb2017/01_setup.md)
-6. Create a Pull Request to master and tag someone from the team.
+Note: Don't mix languages in your documentation. If you want to provide instructions in different ones please create different folders for them.
 
-**BTW**: Language does matter, use spanish or english, do not mix the code lab, if
-you want to provide a translation, please add a directory with the language code
+## Propose new (simple) app ideas for future classes
 
-Example: `todoapp-fr`
+If you have an idea for a simple app, for example:
 
-## Propose new simple-app ideas for future a class
->Hey, the first event idea came 3 days before the first class.
+* A foursquare clone
+* A TODO list app
+* An alarm manager
 
-If you want to contribute here, just think about something easy to create:
+Create an [issue](https://github.com/Nearsoft/androidschool/issues) with your proposal and the following details:
 
-**Examples:**
-- foursquare clone
-- todo list app
-- alarm manager
+* Description
+* Libraries/dependencies needed
+* Some sketches
+* Code: not required if not a developer
 
-Just provide us with your idea in an [issue](https://github.com/Nearsoft/androidschool/issues) and we will contact you!
+## Give a talk
 
-It is better if you have this info:
+Be sure to have your slides ready, for example:
 
-- Description
-- Libraries to use
-- Some sketches
-- **Code** - it is not needed, if you are a designer you can provide better sketches.
+* [Android School intro](http://slides.com/josesalcido-1/android-4#/)
+* [Java and the Object Oriented Programming Principle](http://slides.com/josesalcido-1/object-oriented-programming#/)
 
-## Give a talk!
->Android Talks!
+And create an [issue](https://github.com/Nearsoft/androidschool/issues) with your proposal.
 
-If you want to contribute with a talk, you just need to create your slides.
+## Logistics
 
-**Examples:**
-1. [Android School intro](http://slides.com/josesalcido-1/android-4#/)
-2. [Java and the Object Oriented  Programming Principle](http://slides.com/josesalcido-1/object-oriented-programming#/)
-
-Then, contact us to include it in the next event, or create an [issue](https://github.com/Nearsoft/androidschool/issues) and wait for response from someone on the team.
-
-## Help us with the organization (logistics)
-> It is really important, logistics is almost 90% of the success of an event.
-
-You can do a lot of things in order to help us here:
-
-- Come up early and help with the setup of the venue (Nearsoft offices)
-- Help on each class
-- Food and Drinks!
-- Contact Christian!!!
+* Arrive early and help setting up the venue (Nearsoft offices)
+* Help on each class
+* Food and drinks
+* Contact Christian at cbojorquez@nearsoft.com
 
 ## Improve this document
-> Help the team to improve this document, fix typos, translations, adding new stuff.
 
-# How not to help
-Say that you want to help and that's it.
-
-# Nearsoft Employees
-[Read this](i_want_to_be_part_of_the_team.md)
+* Fix typos
+* Add translations
+* etc.

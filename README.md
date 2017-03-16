@@ -6,15 +6,14 @@
   <br>
 </h1>
 
-# Android School @ Github
-> Everything we build is here
+# Android School @ Nearsoft
 
-Hello there, in this repo you can find everything that you will need for
-Android School @Nearsoft.
+Everything that you need for Android School @ Nearsoft.
 
-## Contributions
-If you are a Nearsoft employee or want to contribute with the Android School event, [please read this](/docs/i_want_to_help.md).
+## Contributing
+
+If you want to contribute to Android School, [read this](docs/i_want_to_help.md).
 
 ## Questions?
-If you have questions, you can ask them on the [issues](https://github.com/Nearsoft/androidschool/issues) page and someone from
-the team will answer.
+
+Feel free to open an [issue](https://github.com/Nearsoft/androidschool/issues) if you have a question.
