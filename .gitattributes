@@ -1,0 +1,6 @@
+# Automatically normalize line endings for all text-based files
+* text=auto
+
+# denote all files that are truly binary
+*.jar binary
+*.png binary
