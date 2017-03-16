@@ -1,5 +1,11 @@
-[logo]:http://res.cloudinary.com/debhicseh/image/upload/v1489605172/Android_Robot_transparente_Negro_jfyvar.png
-![logo][logo]
+<h1 align="center">
+  <br>
+  <img src="https://rawgit.com/Nearsoft/androidschool/master/media/logo.png" alt="Android School logo">
+  <br>
+  <br>
+  <br>
+</h1>
+
 # Android School @ Github
 > Everything we build is here
 
