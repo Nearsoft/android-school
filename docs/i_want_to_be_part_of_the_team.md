@@ -5,3 +5,5 @@ If you're a Nearsoft employee and want to join the Android School team, please c
 * Your name
 * Why you want to join the team
 * Things you can help with
+
+Also, join the #androidschool chat in Nearsoft Slack.
