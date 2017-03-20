@@ -1,9 +1,9 @@
 
 RecyclerView
 ======
-##Setup
+## Setup
 Primero agregamos la dependencia a nuestro archivo build.gradle (Module: app):
-```
+```java
 dependencies {
     ...
     compile 'com.android.support:recyclerview-v7:25.1.1'
@@ -13,9 +13,9 @@ dependencies {
 
 Esto nos permitirá utilizar el tag ```<android.support.v7.widget.RecyclerView/>``` en el archivo de layout para nuestra MainActivity. También nos permite utilizar ```RecyclerView``` en nuestra main activity.
 
-##activity_todomain.xml
+## activity_todomain.xml
 El código de activity_todomain.xml es muy sencillo:
-```
+```java
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -49,8 +49,8 @@ Es importante asignar un ID al RecyclerView ya que de esta manera podremos hacer
 
 Antes de pasar a nuestra activity hay que revisar qué compone nuestro ToDoContent:
 
-##ToDoContent
-```
+## ToDoContent
+```java
 public class ToDoContent implements Serializable {
     private String title;
     private Date date;
@@ -72,18 +72,18 @@ public class ToDoContent implements Serializable {
 //Getters and setters
 ```
 Nuestra data consiste en:
-*Título
-*Fecha
-*Terminado
-*Latitud y longitud
-*Un booleano para indicar si el objeto es destacado
-*Notas
-*Un booleano para indicar si tiene fecha
+* Título
+* Fecha
+* Terminado
+* Latitud y longitud
+* Un booleano para indicar si el objeto es destacado
+* Notas
+* Un booleano para indicar si tiene fecha
 
-##Activity
+## Activity
 Teniendo claro qué es lo que queremos guardar hay que implementar la lógica del RecyclerView en nuestra clase MainActivity. 
 
-```
+```java
 public class MainActivity extends AppCompatActivity {
 
     private ToDoListAdapter adapter;
@@ -122,8 +122,8 @@ En nuestro método ``` getData()``` creamos una lista inicial de datos "dummy" q
 
 Pero hay algo que falta ¿cómo acomodamos los datos que tenemos en nuestros ViewHolder? pues como ya mencioné antes hay que utilizar un Adapter.
 
-##ToDoListAdapter
-```
+## ToDoListAdapter
+```java
 public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ViewHolder> {
 
     private List<ToDoContent> toDoList;
