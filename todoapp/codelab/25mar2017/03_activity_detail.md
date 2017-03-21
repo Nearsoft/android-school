@@ -1,8 +1,7 @@
 [\[Paso Anterior\]](02_detail_layout.md)
 
 #DetailActivity.java
-
-Declararemos locationSwitch, LocationManager que nos ayudara a obtener el servicio de location dentro de `DetailActivity.java` asi como 2 contantes que utilizaremos pare diferenciar los diferentes request que haremos en esta actividad.
+Declararemos locationSwitch, LocationManager que nos ayudara a obtener el servicio de location dentro de `DetailActivity.java` asi como 2 constantes que utilizaremos pare diferenciar los diferentes request que haremos en esta actividad.
 ``` java
 public class DetailActivity extends AppCompatActivity {
 
@@ -41,7 +40,17 @@ Ahora necesitamos declarar la funcionalidad de `locationSwitch` cuando este sea 
 
 Por ahora vamos a dejar el listener vacio y construiremos los métodos para obtener el location y los permisos de ser necesario.
 
-Para saber si nuestro dispositivo android tiene activado Locations accedemos a **Settings > Location**, pero haremos que nuestra aplicacion nos lleve a esta pantalla sin tener que abrir settings y buscar la opcion de location.
+Para saber si nuestro dispositivo android tiene activado Locations accedemos a **Settings > Location**
+ 
+ En settings buscamos Location
+ 
+ <img src="http://i.imgur.com/xzT6CBi.png" height = 500px>
+ 
+ Desde la pantalla de Location podemos activar o desactivar Location.
+ 
+ <img src="http://i.imgur.com/9pQzKOQ.png" height = 500px>
+ 
+ pero haremos que nuestra aplicacion nos lleve a esta pantalla sin tener que abrir settings y buscar la opcion de location.
 
 Para esto vamos a declarar un método que nos muestre un dialogo y pregunte si queremos ir a la pantalla de Location dentro de la configuración de nuestro dispositivo android. El metodo se llamara `showLocationNeededDialog()` y se vera así:
 

@@ -2,7 +2,6 @@
 [\[Paso Anterior\]](04_ic_pin_disabled.md)
 
 #ToDoListAdapter.java
-
 En nuestro `ToDoListAdapter.java` agregaremos la funcionalidad para que cuando nuestro ToDo no contenga location muestre nuestro `ic_pin_disabled.xml` que ayudara al usuario a entender que el ToDo no contiene información de location.
 
 ```java
@@ -27,4 +26,4 @@ Los elementos con location y sin location en la lista deben tener iconos de dife
 <img src="http://i.imgur.com/kqzWfCL.png" height = 500px>
 
 
-Con esto terminamos este codeLab de locations.
+Con esto terminamos este code lab de locations.

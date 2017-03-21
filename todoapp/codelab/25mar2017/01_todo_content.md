@@ -1,9 +1,11 @@
 
-Bienvenido a este codelab de location. Este code lab cuenta con 5 pasos siendo este el primero. Vamos a empezar actualizando nuestro Modelo ToDo.
+Bienvenido a este codelab de location. 
+
+presentacion de conceptos nuevos para este code lab: http://slides.com/roymontoyamontoya/deck-4#/
+
+Este code lab cuenta con 5 pasos siendo este el primero. Vamos a empezar actualizando nuestro Modelo ToDo.
 
 #ToDoContent
-
-
 En `ToDoContent.java` vamos a agregar 2 propiedades nuevas latitude y longitud con estos datos podemos contruir un Location. Tambien agregaremos un nuevo contructor que acepte estes datos y sus respectivos getter y setter.
 ```java
 public class ToDoContent implements Serializable {
