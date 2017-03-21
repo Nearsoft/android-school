@@ -1,9 +1,8 @@
-
 RecyclerView
 ======
 ## Setup
 Primero agregamos la dependencia a nuestro archivo build.gradle (Module: app):
-```java
+```
 dependencies {
     ...
     compile 'com.android.support:recyclerview-v7:25.1.1'
@@ -104,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
     public List<ToDoContent> getData() {
         List<ToDoContent> data = new ArrayList<>();
         ToDoContent first = new ToDoContent("task 1", new Date(), true, 29.09747, -111.02198);
-        first.setNotes("sample text, text sample, hehe hehe\nmore text, here is another text and more samples\nsampletext, stub, lalala i hate the word \"fake\"");
+        first.setNotes("Este es un comentario de prueba\nPueden escribir lo que quieran");
         data.add(first);
         data.add(new ToDoContent("task 2", null, false,  29.09747, -111.02198));
         data.add(new ToDoContent("task 3", null, false, 29.09747, -111.02198));
@@ -114,7 +113,16 @@ public class MainActivity extends AppCompatActivity {
 ```
 En la línea ```todoRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);``` es donde buscamos en el Layout nuestro RecyclerView.
 
-El LayoutManager es el que se encarga de determinar de qué forma se van a acomodar los objetos en la lista. Recordemos que puede ser en forma linear, cuadrícula uniforme o no uniforme, etc.
+El LayoutManager es el que se encarga de determinar de qué forma se van a acomodar los objetos en la lista. Recordemos que puede ser en forma linear, cuadrícula uniforme o no uniforme, etc. 
+
+Si usamos LinearLayoutManager nuestro RecyclerView se vería así:
+![enter image description here](https://lh3.googleusercontent.com/-3PWmUjpv6X8/WNBViCR-hKI/AAAAAAAAbSk/IrDDeOxFmfUjhhQ_APyU6U9qT7Bsv07iwCLcB/s400/Screen+Shot+2017-03-20+at+3.18.23+PM.png "Screen Shot 2017-03-20 at 3.18.23 PM.png")
+
+Cambiando ```new LinearLayoutManager(this)``` por ```new GridLayoutManager(this, 2)``` (donde 2 es el número de columnas) obtendremos la siguiente configuración:
+
+![enter image description here](https://lh3.googleusercontent.com/-H7ADOLHd-CA/WNBXULt--QI/AAAAAAAAbS0/AlphXv7vuks0CkCQhKHp4k4FRIFYFOiqQCLcB/s400/Screen+Shot+2017-03-20+at+3.17.19+PM.png "Screen Shot 2017-03-20 at 3.17.19 PM.png")
+
+Sin embargo nuestro ViewHolder está diseñado para ser utilizado de manera lineal, por lo que usaremos la primera configuración.
 
 El adapter, que veremos a continuación, se encarga de acomodar los datos de una lista en cada uno de los ViewHolder del RecyclerView.
 
@@ -200,12 +208,16 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ViewHo
 ```
 
 Como pudimos observar en nuestra MainActivity, el constructor de ToDoListAdapter recibe como parámetro una lista de ToDoContent, esta lista la estaremos utilizando a través de toda la clase, por lo que hay que declararla como campo.
+
 En el método ```onCreateViewHolder``` nos encargaremos de inflar el Layout de nuestro ViewHolder (el cuál creamos anteriormente).
+
 En ```onBindViewHolder``` nos encargamos de hacer el data binding del respectivo objeto ToDoContent. La variable position nos permite obtener el elemento de la lista para hacer el binding. El método ```bindData``` creado en nuestra subclase ViewHolder se encarga de sacar los datos de ToDoContent y desplegarlos en la UI de nuestro elemento en la lista.
 
 ```getItemCount``` le dirá al RecyclerView cuántos elementos debe de desplegar, por lo que lo único que hay que devolver es el tamaño de nuestra lista.
 
 Además de todos estos métodos creamos una subclase llamada ViewHolder en la que declaramos todos los Views que lleva y creamos el método antes mencionado ```bindData``` que desplegará los daros donde sea necesario. 
+
+El utilizar una subclase ViewHolder es una forma de implementar un patrón llamado ViewHolder pattern el cual optimiza el procesamiento de la lista ya que internamente el sistema no llama a ```findViewById``` por cada elemento en la lista sino que se llaman en ```onCreateViewHolder``` y se reutilizan cada vez que sea necesario. Se crea la cantidad de ViewHolders que sean necesarios para llenar la pantalla y se van reciclando con información distinta conforme nos desplacemos en la lista.
 
 Hacemos también Override al método ```onClick``` y lo único especial que hay que hacer es identificar qué vista fue presionada por medio de su ID. Dependiendo de lo que presionemos es la Activity que vamos a abrir.
 
