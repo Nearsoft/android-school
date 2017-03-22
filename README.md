@@ -8,7 +8,7 @@
 
 # Android School @ Nearsoft
 
-Everything that you need for Android School @ Nearsoft.
+Everything that you need for **Android School @ Nearsoft**.
 
 ## Contributing
 
