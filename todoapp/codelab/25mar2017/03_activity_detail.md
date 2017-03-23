@@ -1,6 +1,7 @@
 [\[Paso Anterior\]](02_detail_layout.md)
 
-#DetailActivity.java
+# DetailActivity.java
+ 
 Declararemos locationSwitch, LocationManager que nos ayudara a obtener el servicio de location dentro de `DetailActivity.java` asi como 2 constantes que utilizaremos pare diferenciar los diferentes request que haremos en esta actividad.
 ``` java
 public class DetailActivity extends AppCompatActivity {

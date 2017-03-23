@@ -1,6 +1,7 @@
 [\[Paso Anterior\]](01_todo_content.md)
 
-#activity_detail
+# activity_detail
+ 
 Comenzaremos agregando un switch que nos permita utilizar nuestra location actual como la location del TODO.
 
 En `activity_detail.xml` agregamos el siguiente switch:

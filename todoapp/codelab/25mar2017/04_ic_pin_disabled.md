@@ -1,23 +1,26 @@
-#ic_pin_disabled.xml
+[\[Paso Anterior\]](03_activity_detail.md)
+
+# ic_pin_disabled.xml
+ 
 crearemos un nuevo vector drawable similar al que ya tenemos pero de color gris, usaremos este icono en los elementos de la lista que no tiene location. En la carpeta de drawable crea un nuevo vector asset 
 
-<img src="http://i.imgur.com/MyaECJu.png" >
+<img src="http://i.imgur.com/MyaECJu.png" height="400px>
 
 llamalo `ic_pin_disabled` y da click en el botón de `icon` para seleccionar otro icon.
 
-<img src="http://i.imgur.com/J8ojvjd.png" >
+<img src="http://i.imgur.com/J8ojvjd.png" height="400px>
 
 En la pantalla de `Select Icon` seleccion de la lista del lado izquierdo `maps` y de los iconos que aparecen aqui, selecciona `pin drop` una vez seleccionado hacemos click en el botón **OK**,
 
-<img src="http://i.imgur.com/nF1CJoP.png" >
+<img src="http://i.imgur.com/nF1CJoP.png" height="400px>
 
 volveremos a la pantalla de Asset Studio hacemos click en **Next** 
 
-<img src="http://i.imgur.com/W1FNFE5.png" >
+<img src="http://i.imgur.com/W1FNFE5.png" height="400px>
 
 nos llevara a una ultima pantalla donde hacemos click en **Finish**
 
-<img src="http://i.imgur.com/JeRPKRw.png" >
+<img src="http://i.imgur.com/JeRPKRw.png" height="400px>
 
 y tendremos el siguiente contenido en el archivo `ic_pin_disabled.xml`:
 

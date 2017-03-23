@@ -1,7 +1,8 @@
 
 [\[Paso Anterior\]](04_ic_pin_disabled.md)
 
-#ToDoListAdapter.java
+# ToDoListAdapter.java
+
 En nuestro `ToDoListAdapter.java` agregaremos la funcionalidad para que cuando nuestro ToDo no contenga location muestre nuestro `ic_pin_disabled.xml` que ayudara al usuario a entender que el ToDo no contiene información de location.
 
 ```java
