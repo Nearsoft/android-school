@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -36,7 +37,7 @@ import com.nearsoft.androidschool.todoapp.models.ToDoContent;
 import java.text.DateFormat;
 import java.util.Date;
 
-public class DetailActivity extends AppCompatActivity {
+public class DetailActivity extends AppCompatActivity implements LocationListener {
 
     public static final String EXTRA_TODO_KEY = "TODO";
 
@@ -53,6 +54,7 @@ public class DetailActivity extends AppCompatActivity {
     private LocationManager locationManager;
     private static final int REQUEST_LOCATION_ENABLED = 0;
     private static final int REQUEST_LOCATION_PERMISSION = 1;
+    private Location userLocation;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -145,8 +147,8 @@ public class DetailActivity extends AppCompatActivity {
         notificationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    prepareNotification(getNotification(todoItem),todoItem.getDate());
+                if (isChecked) {
+                    prepareNotification(getNotification(todoItem), todoItem.getDate());
                 }
             }
         });
@@ -154,8 +156,11 @@ public class DetailActivity extends AppCompatActivity {
 
     private void getLocationFromService() {
         if (ActivityCompat.checkSelfPermission(DetailActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            saveLocationInToDo(location);
+            userLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            if (userLocation != null) {
+                saveLocationInToDo(userLocation);
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+            }
         } else {
             ActivityCompat.requestPermissions(DetailActivity.this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION_PERMISSION);
@@ -266,7 +271,7 @@ public class DetailActivity extends AppCompatActivity {
         }
     }
 
-    public void prepareNotification(Notification notification, Date date){
+    public void prepareNotification(Notification notification, Date date) {
         Intent notificationIntent = new Intent(this, NotificationPublisher.class);
         notificationIntent.putExtra(NotificationPublisher.NOTIFICATION_ID, 1);
         notificationIntent.putExtra(NotificationPublisher.NOTIFICATION, notification);
@@ -274,14 +279,38 @@ public class DetailActivity extends AppCompatActivity {
 
         long remainingMillis = SystemClock.elapsedRealtime() + date.getTime();
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, remainingMillis ,pendingIntent);
+        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, remainingMillis, pendingIntent);
     }
 
-    public Notification getNotification(ToDoContent todoItem){
+    public Notification getNotification(ToDoContent todoItem) {
         Notification.Builder builder = new Notification.Builder(this);
         builder.setContentTitle(todoItem.getTitle())
                 .setContentText(todoItem.getDate().toString())
                 .setSmallIcon(R.drawable.ic_event_note_black);
         return builder.build();
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        if (userLocation == null) {
+            userLocation = location;
+            saveLocationInToDo(location);
+        }
+        locationManager.removeUpdates(this);
+    }
+
+    @Override
+    public void onStatusChanged(String s, int i, Bundle bundle) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String s) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String s) {
+
     }
 }
