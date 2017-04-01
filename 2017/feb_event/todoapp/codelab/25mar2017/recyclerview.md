@@ -193,10 +193,10 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ViewHo
                 Toast.makeText(view.getContext(), "This should hide view", Toast.LENGTH_SHORT).show();
             }
             if (view.getId() == R.id.mapImageButton) {
-                Toast.makeText(view.getContext(), "This should hide view", Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), "This should open MapsActivity", Toast.LENGTH_SHORT).show();
             }
             if (view.getId() == R.id.cardViewContainer) {
-                Toast.makeText(view.getContext(), "This should hide view", Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), "This should open DetailsActivity", Toast.LENGTH_SHORT).show();
             }
         }
     }
