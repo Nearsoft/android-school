@@ -538,4 +538,4 @@ Con esto, deberia ser posible ver:
 
 ![img_date]
 
-Con esto podemos continuar!
+Con esto termina el code lab.
