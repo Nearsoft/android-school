@@ -118,4 +118,4 @@ public class ToDoContent implements Serializable {
 
 Una vez que tengamos esto, continuamos.
 
-[\[Siguiente Paso\]](02_main_activty.md)
+[\[Siguiente Paso\]](02_main_activity.md)
