@@ -15,33 +15,22 @@ Esto nos permitirá utilizar el tag ```<android.support.v7.widget.RecyclerView/>
 ## activity_todomain.xml
 El código de activity_todomain.xml es muy sencillo:
 ```java
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_todo_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.nearsoft.androidschool.todoapp.activities.main.MainActivity">
-
+    tools:context="com.ivanebernal.androidschooltodo.MainActivity">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp"
-        android:scrollbars="vertical" />
+        tools:layout_marginEnd="10dp"
+        tools:layout_marginStart="10dp"
+        android:id="@+id/todo_list"/>
 
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:src="@drawable/ic_add_white"
-        app:layout_anchor="@id/recycler_view"
-        app:layout_anchorGravity="bottom|right|end" />
-
-</android.support.design.widget.CoordinatorLayout>
+</RelativeLayout>
 ```
 
 Es importante asignar un ID al RecyclerView ya que de esta manera podremos hacerle referencia en nuestra activity.
@@ -83,31 +72,29 @@ Nuestra data consiste en:
 Teniendo claro qué es lo que queremos guardar hay que implementar la lógica del RecyclerView en nuestra clase MainActivity. 
 
 ```java
-public class MainActivity extends AppCompatActivity {
-
-    private ToDoListAdapter adapter;
-    private RecyclerView todoRecyclerView;
+public class MainActivity extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_todomain);
-        
-        todoRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        todoRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        setContentView(R.layout.activity_main);
 
-		adapter = new ToDoListAdapter(getData());
-        todoRecyclerView.setAdapter(adapter);
+        RecyclerView toDoRecyclerView = (RecyclerView) findViewById(R.id.todo_list);
+        List<ToDoItem> items = getItems();
+        toDoRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        toDoRecyclerView.setAdapter(new ToDoAdapter(items));
+
     }
 
-    public List<ToDoContent> getData() {
-        List<ToDoContent> data = new ArrayList<>();
-        ToDoContent first = new ToDoContent("task 1", new Date(), true, 29.09747, -111.02198);
-        first.setNotes("Este es un comentario de prueba\nPueden escribir lo que quieran");
-        data.add(first);
-        data.add(new ToDoContent("task 2", null, false,  29.09747, -111.02198));
-        data.add(new ToDoContent("task 3", null, false, 29.09747, -111.02198));
-        return data;
+    private List<ToDoItem> getItems() {
+        List<ToDoItem> items = new ArrayList<>();
+        ToDoItem item1 = new ToDoItem("Hola mundo!", "25/3/2017", "Hermosillo, Son.");
+        ToDoItem item2 = new ToDoItem("Soy prueba", "25/3/2017", "Hermosillo, Son.");
+        ToDoItem item3 = new ToDoItem("Yo también", "25/3/2017", "Hermosillo, Son.");
+        items.add(item1);
+        items.add(item2);
+        items.add(item3);
+        return items;
     }
 }
 ```
@@ -132,70 +119,68 @@ Pero hay algo que falta ¿cómo acomodamos los datos que tenemos en nuestros Vie
 
 ## ToDoListAdapter
 ```java
-public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ViewHolder> {
+class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
+    private List<ToDoItem> items;
 
-    private List<ToDoContent> toDoList;
-
-    public ToDoListAdapter(List<ToDoContent> toDoItemList) {
-        toDoList = toDoItemList;
+    public ToDoAdapter(List<ToDoItem> items) {
+        this.items = new ArrayList<>();
+        this.items.addAll(items);
     }
 
     @Override
-    public ToDoListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View itemView = inflater.inflate(R.layout.list_item, parent, false);
-        return new ViewHolder(itemView);
+        return new ViewHolder(inflater.inflate(R.layout.holder_view, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(ToDoListAdapter.ViewHolder viewHolder, int position) {
-        viewHolder.bindData(toDoList.get(position));
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        ToDoItem item = items.get(position);
+        holder.bindData(item);
     }
 
     @Override
     public int getItemCount() {
-        return toDoList.size();
+        return items.size();
     }
 
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-    static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        private CardView containter;
+        private CheckBox checkBox;
+        private TextView titleTextView;
+        private TextView dateTextView;
+        private ImageButton button;
+        private View holder;
 
-        ToDoContent item;
-        CardView container;
-        TextView toDoNameTextBox;
-        TextView dateTextBox;
-        CheckBox doneCheckbox;
-        ImageButton mapButton;
 
-        ViewHolder(View itemView) {
+        public ViewHolder(View itemView) {
             super(itemView);
-            container = (CardView) itemView.findViewById(R.id.cardViewContainer);
-            toDoNameTextBox = (TextView) itemView.findViewById(R.id.toDoText);
-            dateTextBox = (TextView) itemView.findViewById(R.id.dateText);
-            doneCheckbox = (CheckBox) itemView.findViewById(R.id.isDoneCheckbox);
-            mapButton = (ImageButton) itemView.findViewById(R.id.mapImageButton);
+            containter = (CardView) itemView.findViewById(R.id.container); 
+            checkBox = (CheckBox) itemView.findViewById(R.id.is_done_check_box);
+            titleTextView = (TextView) itemView.findViewById(R.id.todo_text);
+            dateTextView = (TextView) itemView.findViewById(R.id.date_text);
+            button = (ImageButton) itemView.findViewById(R.id.image_button);
+            holder = itemView;
         }
 
-        void bindData(ToDoContent toDoItem) {
-            item = toDoItem;
-            toDoNameTextBox.setText(toDoItem.getTitle());
-            if (toDoItem.hasDate()) {
-                dateTextBox.setText(toDoItem.getDate().toString());
-            }
-            doneCheckbox.setOnClickListener(this);
-            mapButton.setOnClickListener(this);
-            container.setOnClickListener(this);
+        public void bindData(ToDoItem item){
+            titleTextView.setText(item.getTitle());
+            dateTextView.setText(item.getDate());
+            containter.setOnClickListener(this);
+            button.setOnClickListener(this);
+            checkBox.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-            if (view.getId() == R.id.isDoneCheckbox) {
+            if(view.getId() == R.id.is_done_check_box){
                 Toast.makeText(view.getContext(), "This should hide view", Toast.LENGTH_SHORT).show();
             }
-            if (view.getId() == R.id.mapImageButton) {
+            if (view.getId() == R.id.image_button){
                 Toast.makeText(view.getContext(), "This should open MapsActivity", Toast.LENGTH_SHORT).show();
             }
-            if (view.getId() == R.id.cardViewContainer) {
+            if (view.getId() == R.id.container){
                 Toast.makeText(view.getContext(), "This should open DetailsActivity", Toast.LENGTH_SHORT).show();
             }
         }
