@@ -1,4 +1,7 @@
 [img_date]:http://imgur.com/kksjG9r.png
+
+[\[Paso Anterior\]](09_add_date.md)
+
 # Date & Todos
 
 Vamos a agregar un nuevo atributo a nuestros Todos, ahora queremos una fecha en la que deberia notificarnos nuestra aplicación, aun no haremos las notificaciones pero si prepararemos la aplicación para el futuro.

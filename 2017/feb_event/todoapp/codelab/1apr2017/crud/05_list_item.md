@@ -1,3 +1,5 @@
+[\[Paso Anterior\]](04_new_activty.md)
+
 # List Item
 
 - CardView nos provee de un hermoso efecto sin tener que hacer mucho trabajo, para lograrlo, hay que modificar el archivo
@@ -77,3 +79,5 @@ El archivo `@drawable/ic_pin_accent` no existe, pero es basicamente el archivo `
 ```
 
 Corre la aplicación y deberias ver un nuevo efecto al hacer click en el card view!
+
+[\[Siguiente Paso\]](06_edit_todo_transition.md)

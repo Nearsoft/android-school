@@ -1,3 +1,5 @@
+[\[Paso Anterior\]](06_edit_todo_transition.md)
+
 # Date Field on Detail Activity
 
 - Queremos agregar un nuevo campo al detalle que sea la fecha, actualmente no lo mostramos, asi que hay que agregar esos campos:
@@ -198,3 +200,5 @@ public List<ToDoContent> getData() {
 ```
 
 En este punto, podemos continuar.
+
+[\[Siguiente Paso\]](08_main_activity_view.md)

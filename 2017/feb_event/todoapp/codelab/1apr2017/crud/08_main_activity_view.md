@@ -1,3 +1,5 @@
+[\[Paso Anterior\]](07_add_new_fields_to_detail.md)
+
 # Main Activity View
 
 - En este punto, tenemos un pequeño detalle en el archivo: `activity_todomain.xml`
@@ -39,3 +41,5 @@ El detalle es que teniamos un `RelativeLayout` extra, que no era necesario.
 Hemos terminado, la operación de READ, podemos mostrar los datos, la vista la iremos mejorando.
 
 En este punto, podemos continuar.
+
+[\[Siguiente Paso\]](09_create_operation.md)

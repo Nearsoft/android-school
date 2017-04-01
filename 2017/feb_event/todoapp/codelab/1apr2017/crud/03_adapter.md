@@ -1,3 +1,5 @@
+[\[Paso Anterior\]](02_main_activity.md)
+
 # ToDoListAdapter Update
 - Haremos unos cambios en `ToDoListAdapter.java`
 
@@ -102,3 +104,7 @@ itemView.getContext().startActivity(intent);
 ```
 
 Esto lo que hara, es que iniciará una nueva actividad de Detalle.
+
+Con esto podemos continuar.
+
+[\[Siguiente Paso\]](04_new_activity.md)

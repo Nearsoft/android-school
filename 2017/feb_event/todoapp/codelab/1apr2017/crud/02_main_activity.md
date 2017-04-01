@@ -1,3 +1,5 @@
+[\[Paso Anterior\]](01_model.md)
+
 # Main Activity Rename
 
 - Actualmente tenemos la clase `ToDoMain.java`, pero ese es un nombre equivocado, cambiemos el nombre de la clase a `MainActivity.java`
@@ -128,3 +130,5 @@ Si tratamos de correr la app, probablemente truene.
 ```
 
 Teniendo esto, podemos continuar.
+
+[\[Siguiente Paso\]](03_adapter.md)

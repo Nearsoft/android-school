@@ -1,5 +1,8 @@
 [img_1]:http://i.imgur.com/AT1bxwj.png
 [img_2]:http://i.imgur.com/ZyokwNf.png
+
+[\[Paso Anterior\]](03_adapter.md)
+
 # Enter Detail Activity
 
 - **Crearemos una nueva actividad** llamada `DetailActivity.java`, debera estar en el paquete
@@ -127,3 +130,5 @@ Corremos la aplicación y deberiamos ver algo asi:
 
 ![img_1]
 ![img_2]
+
+[\[Siguiente Paso\]](05_list_item.md)

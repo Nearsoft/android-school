@@ -1,6 +1,8 @@
 [img_create_btn]:http://i.imgur.com/jdxYkB0.png
 [img_edit_btn]:http://imgur.com/ZorimYr.png
 
+[\[Paso Anterior\]](08_main_activity_view.md)
+
 # CREATE & UPDATE Operation
 
 - Ahora crearemos la operación de CREATE (valgame).
@@ -271,3 +273,5 @@ Al finalizar esto, deberiamos poder agregar un TodoItem, editar un TodoItem exis
 Claro, sin guardar los datos - aun.
 
 En este punto, podemos continuar.
+
+[\[Siguiente Paso\]](10_add_date.md)

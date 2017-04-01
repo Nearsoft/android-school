@@ -1,3 +1,5 @@
+[\[Paso Anterior\]](05_list_item.md)
+
 # How to Edit
 
 - Agregaremos un boton para poder editar el ToDo una vez que ya leimos los datos.
@@ -133,3 +135,5 @@ Su contenido es el siguiente:
 Este es el drawable del boton de "Editar"
 
 En este punto, podemos continuar.
+
+[\[Siguiente Paso\]](07_add_new_fields_to_detail.md)
