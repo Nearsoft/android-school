@@ -190,7 +190,7 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ViewHo
         @Override
         public void onClick(View view) {
             if (view.getId() == R.id.isDoneCheckbox) {
-                Snackbar.make(mapButton, "this should hide this item when clicked maybe", Snackbar.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), "This should hide view", Toast.LENGTH_SHORT).show();
             }
             if (view.getId() == R.id.mapImageButton) {
                 Intent intent = new Intent(view.getContext(), MapsActivity.class);
