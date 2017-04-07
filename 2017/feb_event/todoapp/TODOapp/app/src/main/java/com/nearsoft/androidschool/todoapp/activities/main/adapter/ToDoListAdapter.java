@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import com.nearsoft.androidschool.todoapp.R;
 import com.nearsoft.androidschool.todoapp.activities.detail.DetailActivity;
-import com.nearsoft.androidschool.todoapp.activities.map.MapsActivity;
 import com.nearsoft.androidschool.todoapp.models.ToDoContent;
 
 import java.util.ArrayList;
@@ -77,10 +76,6 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ViewHo
             doneCheckbox.setOnClickListener(this);
             mapButton.setOnClickListener(this);
             container.setOnClickListener(this);
-            if (item.getLat() == 0.0d && item.getLng() == 0.0d) {
-                mapButton.setImageResource(R.drawable.ic_pin_disabled);
-                mapButton.setEnabled(false);
-            }
         }
 
         @Override
@@ -89,9 +84,7 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ViewHo
                 Snackbar.make(mapButton, "this should hide this item when clicked maybe", Snackbar.LENGTH_SHORT).show();
             }
             if (view.getId() == R.id.mapImageButton) {
-                Intent intent = new Intent(view.getContext(), MapsActivity.class);
-                intent.putExtra(DetailActivity.EXTRA_TODO_KEY, item);
-                view.getContext().startActivity(intent);
+                Snackbar.make(view, "Maps are not going to be part of this Android School :-(", Snackbar.LENGTH_SHORT).show();
             }
             if (view.getId() == R.id.cardViewContainer) {
                 Intent intent = new Intent(view.getContext(), DetailActivity.class);

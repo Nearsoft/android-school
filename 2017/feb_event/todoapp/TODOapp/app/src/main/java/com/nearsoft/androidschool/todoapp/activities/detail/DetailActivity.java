@@ -136,21 +136,6 @@ public class DetailActivity extends AppCompatActivity {
                 dateCardView.setVisibility(isChecked ? View.VISIBLE : View.INVISIBLE);
             }
         });
-        locationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if (isChecked) {
-                    if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-                        getLocationFromService();
-                    } else {
-                        showLocationNeededDialog();
-                    }
-                } else {
-                    todoItem.setLat(0.0d);
-                    todoItem.setLng(0.0d);
-                }
-            }
-        });
         notificationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -159,16 +144,6 @@ public class DetailActivity extends AppCompatActivity {
                 }
             }
         });
-    }
-
-    private void getLocationFromService() {
-        if (ActivityCompat.checkSelfPermission(DetailActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            saveLocationInToDo(location);
-        } else {
-            ActivityCompat.requestPermissions(DetailActivity.this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION_PERMISSION);
-        }
     }
 
     private void saveLocationInToDo(Location location) {
@@ -236,51 +211,7 @@ public class DetailActivity extends AppCompatActivity {
         dateTextView.setText(dateText);
     }
 
-    private void showLocationNeededDialog() {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this)
-                .setTitle(R.string.location_dialog_title)
-                .setMessage(R.string.location_dialog_message)
-                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        showLocationSettings();
-                    }
-                })
-                .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        locationSwitch.setChecked(false);
-                    }
-                });
-        builder.create()
-                .show();
-    }
-
-    private void showLocationSettings() {
-        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-        startActivityForResult(intent, REQUEST_LOCATION_ENABLED);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_LOCATION_ENABLED
-                && locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            getLocationFromService();
-        } else {
-            locationSwitch.setChecked(false);
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == REQUEST_LOCATION_PERMISSION && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            getLocationFromService();
-        } else {
-            locationSwitch.setChecked(false);
-        }
-    }
-
-    public void prepareNotification(Notification notification, Date date) {
+    public void prepareNotification(Notification notification, Date date){
         Intent notificationIntent = new Intent(this, NotificationPublisher.class);
         notificationIntent.putExtra(NotificationPublisher.NOTIFICATION_ID, 1);
         notificationIntent.putExtra(NotificationPublisher.NOTIFICATION, notification);
