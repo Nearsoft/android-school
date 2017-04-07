@@ -1,24 +1,17 @@
 package com.nearsoft.androidschool.todoapp.activities.detail;
 
-import android.Manifest;
 import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.provider.Settings;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.view.View;
@@ -30,6 +23,7 @@ import android.widget.TextView;
 
 import com.nearsoft.androidschool.todoapp.R;
 import com.nearsoft.androidschool.todoapp.activities.notification.NotificationPublisher;
+import com.nearsoft.androidschool.todoapp.database.ToDoDbHelper;
 import com.nearsoft.androidschool.todoapp.fragment.DatePickerFragment;
 import com.nearsoft.androidschool.todoapp.models.ToDoContent;
 
@@ -53,6 +47,7 @@ public class DetailActivity extends AppCompatActivity {
     private LocationManager locationManager;
     private static final int REQUEST_LOCATION_ENABLED = 0;
     private static final int REQUEST_LOCATION_PERMISSION = 1;
+    private ToDoDbHelper toDoDbHelper;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,7 +58,14 @@ public class DetailActivity extends AppCompatActivity {
         setSaveListener();
         setEditListener();
         setDateListener();
+        toDoDbHelper = new ToDoDbHelper(this);
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+    }
+
+    @Override
+    protected void onDestroy() {
+        toDoDbHelper.onDestroy();
+        super.onDestroy();
     }
 
     private void setViews() {
@@ -84,7 +86,7 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 saveData();
-                Snackbar.make(editFab, "Data Saved (Not saving in reality)", Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(editFab, "Data Saved", Snackbar.LENGTH_SHORT).show();
                 enableToDoViewEdition(false);
             }
         });
@@ -113,7 +115,7 @@ public class DetailActivity extends AppCompatActivity {
         dialog.attachListener(new android.app.DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
-                Date dateTime = new Date(year, month + 1, dayOfMonth, 0, 0);
+                Date dateTime = new Date(year, month, dayOfMonth, 0, 0);
                 updateDate(dateTime);
             }
         });
@@ -130,8 +132,8 @@ public class DetailActivity extends AppCompatActivity {
         notificationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    prepareNotification(getNotification(todoItem),todoItem.getDate());
+                if (isChecked) {
+                    prepareNotification(getNotification(todoItem), todoItem.getDate());
                 }
             }
         });
@@ -156,14 +158,23 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void saveData() {
-        String selectedDate = dateTextView.getText().toString();
-        if (selectedDate.equals(getText(R.string.date))) {
-            Snackbar.make(saveFab, R.string.set_date_or_change_switch_message, Snackbar.LENGTH_LONG);
-            return;
+        if (dateSwitch.isChecked()) {
+            String selectedDate = dateTextView.getText().toString();
+            if (selectedDate.equals(getText(R.string.date))) {
+                Snackbar.make(saveFab, R.string.set_date_or_change_switch_message, Snackbar.LENGTH_LONG);
+                return;
+            }
+            todoItem.setDate(new Date(selectedDate));
+        } else {
+            todoItem.setDate(null);
         }
         todoItem.setTitle(titleEditTextView.getText().toString());
-        todoItem.setDate(new Date(selectedDate));
         todoItem.setNotes(notesEditTextView.getText().toString());
+        if (todoItem.getId() == null) {
+            toDoDbHelper.saveToDo(todoItem);
+        } else {
+            toDoDbHelper.updateToDo(todoItem);
+        }
     }
 
     private void populateToDoObject() {
@@ -196,7 +207,7 @@ public class DetailActivity extends AppCompatActivity {
         dateTextView.setText(dateText);
     }
 
-    public void prepareNotification(Notification notification, Date date){
+    public void prepareNotification(Notification notification, Date date) {
         Intent notificationIntent = new Intent(this, NotificationPublisher.class);
         notificationIntent.putExtra(NotificationPublisher.NOTIFICATION_ID, 1);
         notificationIntent.putExtra(NotificationPublisher.NOTIFICATION, notification);
@@ -204,10 +215,10 @@ public class DetailActivity extends AppCompatActivity {
 
         long remainingMillis = SystemClock.elapsedRealtime() + date.getTime();
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, remainingMillis ,pendingIntent);
+        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, remainingMillis, pendingIntent);
     }
 
-    public Notification getNotification(ToDoContent todoItem){
+    public Notification getNotification(ToDoContent todoItem) {
         Notification.Builder builder = new Notification.Builder(this);
         builder.setContentTitle(todoItem.getTitle())
                 .setContentText(todoItem.getDate().toString())

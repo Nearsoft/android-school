@@ -11,25 +11,23 @@ import android.view.View;
 import com.nearsoft.androidschool.todoapp.R;
 import com.nearsoft.androidschool.todoapp.activities.detail.DetailActivity;
 import com.nearsoft.androidschool.todoapp.activities.main.adapter.ToDoListAdapter;
-import com.nearsoft.androidschool.todoapp.models.ToDoContent;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import com.nearsoft.androidschool.todoapp.database.ToDoDbHelper;
 
 public class MainActivity extends AppCompatActivity {
 
     private ToDoListAdapter adapter;
     private FloatingActionButton addFab;
     private RecyclerView todoRecyclerView;
+    private ToDoDbHelper toDoDbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_todomain);
+        toDoDbHelper = new ToDoDbHelper(this);
 
         addFab = (FloatingActionButton) findViewById(R.id.fab);
-        adapter = new ToDoListAdapter(getData());
+        adapter = new ToDoListAdapter();
 
         todoRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         todoRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -44,14 +42,16 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public List<ToDoContent> getData() {
-        List<ToDoContent> data = new ArrayList<>();
-        Date alarmTime = new Date(System.currentTimeMillis() + 1000);
-        ToDoContent first = new ToDoContent("task 1", new Date());
-        first.setNotes("sample text, text sample, hehe hehe\nmore text, here is another text and more samples\nsampletext, stub, lalala i hate the word \"fake\"");
-        data.add(first);
-        data.add(new ToDoContent("task 2", null, 29.09747, -111.02198, false));
-        data.add(new ToDoContent("task 3", alarmTime, 29.09747, -111.02198, true));
-        return data;
+    @Override
+    protected void onResume() {
+        super.onResume();
+        adapter.updateToDos(toDoDbHelper.getAllToDos());
     }
+
+    @Override
+    protected void onDestroy() {
+        toDoDbHelper.onDestroy();
+        super.onDestroy();
+    }
+
 }
