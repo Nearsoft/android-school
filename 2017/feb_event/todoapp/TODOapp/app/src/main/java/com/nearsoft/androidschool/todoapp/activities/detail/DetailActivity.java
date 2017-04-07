@@ -30,6 +30,7 @@ import android.widget.TextView;
 
 import com.nearsoft.androidschool.todoapp.R;
 import com.nearsoft.androidschool.todoapp.activities.notification.NotificationPublisher;
+import com.nearsoft.androidschool.todoapp.database.ToDoDbHelper;
 import com.nearsoft.androidschool.todoapp.fragment.DatePickerFragment;
 import com.nearsoft.androidschool.todoapp.models.ToDoContent;
 
@@ -53,6 +54,7 @@ public class DetailActivity extends AppCompatActivity {
     private LocationManager locationManager;
     private static final int REQUEST_LOCATION_ENABLED = 0;
     private static final int REQUEST_LOCATION_PERMISSION = 1;
+    private ToDoDbHelper toDoDbHelper;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,7 +65,14 @@ public class DetailActivity extends AppCompatActivity {
         setSaveListener();
         setEditListener();
         setDateListener();
+        toDoDbHelper = new ToDoDbHelper(this);
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+    }
+
+    @Override
+    protected void onDestroy() {
+        toDoDbHelper.onDestroy();
+        super.onDestroy();
     }
 
     private void setViews() {
@@ -84,7 +93,7 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 saveData();
-                Snackbar.make(editFab, "Data Saved (Not saving in reality)", Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(editFab, "Data Saved", Snackbar.LENGTH_SHORT).show();
                 enableToDoViewEdition(false);
             }
         });
@@ -113,7 +122,7 @@ public class DetailActivity extends AppCompatActivity {
         dialog.attachListener(new android.app.DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
-                Date dateTime = new Date(year, month + 1, dayOfMonth, 0, 0);
+                Date dateTime = new Date(year, month, dayOfMonth, 0, 0);
                 updateDate(dateTime);
             }
         });
@@ -145,8 +154,8 @@ public class DetailActivity extends AppCompatActivity {
         notificationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    prepareNotification(getNotification(todoItem),todoItem.getDate());
+                if (isChecked) {
+                    prepareNotification(getNotification(todoItem), todoItem.getDate());
                 }
             }
         });
@@ -190,6 +199,11 @@ public class DetailActivity extends AppCompatActivity {
         todoItem.setDate(new Date(selectedDate));
         todoItem.setNotes(notesEditTextView.getText().toString());
         todoItem.setHasDate(dateSwitch.isChecked());
+        if (todoItem.getId() == null) {
+            toDoDbHelper.saveToDo(todoItem);
+        } else {
+            toDoDbHelper.updateToDo(todoItem);
+        }
     }
 
     private void populateToDoObject() {
@@ -266,7 +280,7 @@ public class DetailActivity extends AppCompatActivity {
         }
     }
 
-    public void prepareNotification(Notification notification, Date date){
+    public void prepareNotification(Notification notification, Date date) {
         Intent notificationIntent = new Intent(this, NotificationPublisher.class);
         notificationIntent.putExtra(NotificationPublisher.NOTIFICATION_ID, 1);
         notificationIntent.putExtra(NotificationPublisher.NOTIFICATION, notification);
@@ -274,10 +288,10 @@ public class DetailActivity extends AppCompatActivity {
 
         long remainingMillis = SystemClock.elapsedRealtime() + date.getTime();
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, remainingMillis ,pendingIntent);
+        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, remainingMillis, pendingIntent);
     }
 
-    public Notification getNotification(ToDoContent todoItem){
+    public Notification getNotification(ToDoContent todoItem) {
         Notification.Builder builder = new Notification.Builder(this);
         builder.setContentTitle(todoItem.getTitle())
                 .setContentText(todoItem.getDate().toString())
