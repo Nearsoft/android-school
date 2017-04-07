@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class ToDoContent implements Serializable {
+    private Long id;
     private String title;
     private Date date;
     private boolean done;
@@ -107,5 +108,13 @@ public class ToDoContent implements Serializable {
 
     public void setLng(double lng) {
         this.lng = lng;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
