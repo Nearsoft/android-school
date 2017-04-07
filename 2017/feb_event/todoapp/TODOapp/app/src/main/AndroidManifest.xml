@@ -20,13 +20,6 @@
         <activity
             android:name=".activities.detail.DetailActivity"
             android:parentActivityName=".activities.main.MainActivity" />
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="@string/GOOGLE_MAPS_KEY" />
-
-        <activity
-            android:name=".activities.map.MapsActivity"
-            android:label="@string/title_activity_maps"/>
         <receiver android:name=".activities.notification.NotificationPublisher"/>
     </application>
 
