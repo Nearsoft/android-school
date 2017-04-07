@@ -16,14 +16,15 @@ import com.nearsoft.androidschool.todoapp.activities.detail.DetailActivity;
 import com.nearsoft.androidschool.todoapp.activities.map.MapsActivity;
 import com.nearsoft.androidschool.todoapp.models.ToDoContent;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ViewHolder> {
 
     private List<ToDoContent> toDoList;
 
-    public ToDoListAdapter(List<ToDoContent> toDoItemList) {
-        toDoList = toDoItemList;
+    public ToDoListAdapter() {
+        toDoList = new ArrayList<>();
     }
 
     @Override
@@ -43,6 +44,11 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ViewHo
         return toDoList.size();
     }
 
+    public void updateToDos(List<ToDoContent> todos) {
+        toDoList.clear();
+        toDoList.addAll(todos);
+        notifyDataSetChanged();
+    }
 
     static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
