@@ -16,7 +16,6 @@ public class DbHelper extends SQLiteOpenHelper {
                     ToDoTable._ID + " INTEGER PRIMARY KEY," +
                     ToDoTable.COLUMN_NAME_TITLE + " TEXT," +
                     ToDoTable.COLUMN_NAME_DATE + " DATETIME," +
-                    ToDoTable.COLUMN_NAME_HAS_DATE + " BOOLEAN NOT NULL CHECK (" + ToDoTable.COLUMN_NAME_DONE + " IN (0,1))," +
                     ToDoTable.COLUMN_NAME_DONE + " BOOLEAN NOT NULL CHECK (" + ToDoTable.COLUMN_NAME_DONE + " IN (0,1))," +
                     ToDoTable.COLUMN_NAME_LATITUDE + " DOUBLE," +
                     ToDoTable.COLUMN_NAME_LONGITUDE + " DOUBLE," +

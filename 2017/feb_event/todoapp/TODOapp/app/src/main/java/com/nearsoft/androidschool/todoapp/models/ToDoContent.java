@@ -28,7 +28,6 @@ public class ToDoContent implements Serializable {
     }
 
     public ToDoContent() {
-        this.date = new Date();
     }
 
     public boolean isNotify() {

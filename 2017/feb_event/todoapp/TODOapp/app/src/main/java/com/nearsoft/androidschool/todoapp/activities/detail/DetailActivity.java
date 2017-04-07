@@ -1,24 +1,17 @@
 package com.nearsoft.androidschool.todoapp.activities.detail;
 
-import android.Manifest;
 import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.provider.Settings;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.view.View;
@@ -165,15 +158,18 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void saveData() {
-        String selectedDate = dateTextView.getText().toString();
-        if (selectedDate.equals(getText(R.string.date))) {
-            Snackbar.make(saveFab, R.string.set_date_or_change_switch_message, Snackbar.LENGTH_LONG);
-            return;
+        if (dateSwitch.isChecked()) {
+            String selectedDate = dateTextView.getText().toString();
+            if (selectedDate.equals(getText(R.string.date))) {
+                Snackbar.make(saveFab, R.string.set_date_or_change_switch_message, Snackbar.LENGTH_LONG);
+                return;
+            }
+            todoItem.setDate(new Date(selectedDate));
+        } else {
+            todoItem.setDate(null);
         }
         todoItem.setTitle(titleEditTextView.getText().toString());
-        todoItem.setDate(new Date(selectedDate));
         todoItem.setNotes(notesEditTextView.getText().toString());
-        todoItem.setHasDate(dateSwitch.isChecked());
         if (todoItem.getId() == null) {
             toDoDbHelper.saveToDo(todoItem);
         } else {
@@ -211,7 +207,7 @@ public class DetailActivity extends AppCompatActivity {
         dateTextView.setText(dateText);
     }
 
-    public void prepareNotification(Notification notification, Date date){
+    public void prepareNotification(Notification notification, Date date) {
         Intent notificationIntent = new Intent(this, NotificationPublisher.class);
         notificationIntent.putExtra(NotificationPublisher.NOTIFICATION_ID, 1);
         notificationIntent.putExtra(NotificationPublisher.NOTIFICATION, notification);

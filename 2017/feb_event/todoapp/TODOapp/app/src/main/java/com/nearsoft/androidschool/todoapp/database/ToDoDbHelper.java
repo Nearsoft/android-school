@@ -8,21 +8,20 @@ import android.database.sqlite.SQLiteDatabase;
 import com.nearsoft.androidschool.todoapp.database.ToDoDbContract.ToDoTable;
 import com.nearsoft.androidschool.todoapp.models.ToDoContent;
 
+import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 
 public class ToDoDbHelper {
 
     private final DbHelper dbHelper;
-    private final SimpleDateFormat dateFormat;
+    private final DateFormat dateFormat;
 
     public ToDoDbHelper(Context context) {
         dbHelper = new DbHelper(context);
-        dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        dateFormat = android.text.format.DateFormat.getDateFormat(context);
     }
 
     public long saveToDo(ToDoContent toDo) {
@@ -70,7 +69,6 @@ public class ToDoDbHelper {
     private ToDoContent getToDoFromCursor(Cursor cursor) {
         ToDoContent toDo = new ToDoContent();
         toDo.setTitle(cursor.getString(cursor.getColumnIndex(ToDoTable.COLUMN_NAME_TITLE)));
-        toDo.setHasDate(cursor.getInt(cursor.getColumnIndex(ToDoTable.COLUMN_NAME_HAS_DATE)) == 1);
         toDo.setDone(cursor.getInt(cursor.getColumnIndex(ToDoTable.COLUMN_NAME_DONE)) == 1);
         toDo.setLat(cursor.getDouble(cursor.getColumnIndex(ToDoTable.COLUMN_NAME_LATITUDE)));
         toDo.setLng(cursor.getDouble(cursor.getColumnIndex(ToDoTable.COLUMN_NAME_LONGITUDE)));
@@ -79,7 +77,10 @@ public class ToDoDbHelper {
         toDo.setNotify(cursor.getInt(cursor.getColumnIndex(ToDoTable.COLUMN_NAME_NOTIFY)) == 1);
         toDo.setId(cursor.getLong(cursor.getColumnIndex(ToDoTable._ID)));
         try {
-            toDo.setDate(dateFormat.parse(cursor.getString(cursor.getColumnIndex(ToDoTable.COLUMN_NAME_DATE))));
+            String dateString = cursor.getString(cursor.getColumnIndex(ToDoTable.COLUMN_NAME_DATE));
+            if (dateString != null) {
+                toDo.setDate(dateFormat.parse(dateString));
+            }
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -90,8 +91,10 @@ public class ToDoDbHelper {
     private ContentValues getValuesFromToDo(ToDoContent toDo) {
         ContentValues values = new ContentValues();
         values.put(ToDoTable.COLUMN_NAME_TITLE, toDo.getTitle());
-        values.put(ToDoTable.COLUMN_NAME_DATE, dateFormat.format(toDo.getDate()));
-        values.put(ToDoTable.COLUMN_NAME_HAS_DATE, toDo.hasDate());
+        values.put(
+                ToDoTable.COLUMN_NAME_DATE,
+                toDo.getDate() == null ? null : dateFormat.format(toDo.getDate())
+        );
         values.put(ToDoTable.COLUMN_NAME_DONE, toDo.isDone());
         values.put(ToDoTable.COLUMN_NAME_LATITUDE, toDo.getLat());
         values.put(ToDoTable.COLUMN_NAME_LONGITUDE, toDo.getLng());

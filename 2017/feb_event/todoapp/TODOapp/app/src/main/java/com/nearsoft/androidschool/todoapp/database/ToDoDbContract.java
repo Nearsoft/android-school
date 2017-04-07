@@ -17,6 +17,5 @@ public final class ToDoDbContract {
         public static final String COLUMN_NAME_STARRED = "starred";
         public static final String COLUMN_NAME_NOTES = "notes";
         public static final String COLUMN_NAME_NOTIFY = "notify";
-        public static final String COLUMN_NAME_HAS_DATE = "has_date";
     }
 }
