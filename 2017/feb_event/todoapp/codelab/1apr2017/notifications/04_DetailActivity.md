@@ -67,7 +67,7 @@
     }
     ```
    
-## Nuestro **DetailActivity** debe verse como [este](https://gist.github.com/Mathreyu/7216fb52e06bec624338bbc3f84a8f06.js)
+## Nuestro **DetailActivity** debe verse como [este](https://gist.github.com/Mathreyu/7216fb52e06bec624338bbc3f84a8f06)
  (hay que borrar algunos métodos que no se usarán)
 <img src="http://image.prntscr.com/image/aef062f0d8af41ef8ae03e94c4b753a1.png"/>
  
