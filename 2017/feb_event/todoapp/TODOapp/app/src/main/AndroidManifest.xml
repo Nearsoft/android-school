@@ -3,6 +3,8 @@
     package="com.nearsoft.androidschool.todoapp">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+
 
     <application
         android:allowBackup="true"
@@ -20,7 +22,11 @@
         <activity
             android:name=".activities.detail.DetailActivity"
             android:parentActivityName=".activities.main.MainActivity" />
-        <receiver android:name=".activities.notification.NotificationPublisher"/>
+        <receiver android:name=".activities.notification.NotificationPublisher">
+            <intent-filter>
+                <action android:name="com.nearsoft.androidschool.todoapp.activities.detail.DetailActivity"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

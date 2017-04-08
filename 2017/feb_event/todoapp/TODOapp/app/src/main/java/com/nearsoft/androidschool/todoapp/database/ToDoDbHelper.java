@@ -55,6 +55,18 @@ public class ToDoDbHelper {
         return toDo;
     }
 
+    public List<ToDoContent> getAllNotificationTodos() {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String selection = ToDoTable.COLUMN_NAME_NOTIFY + " = ? AND " + ToDoTable.COLUMN_NAME_DATE + "> date('now')";
+        String[] selectionArgs = {"1"};
+        Cursor cursor = db.query(ToDoTable.TABLE_NAME, null, selection, selectionArgs, null, null, null);
+        List<ToDoContent> toDos = new ArrayList<>();
+        while (cursor.moveToNext()) {
+            toDos.add(getToDoFromCursor(cursor));
+        }
+        cursor.close();
+        return toDos;
+    }
     public List<ToDoContent> getAllToDos() {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.query(ToDoTable.TABLE_NAME, null, null, null, null, null, null);
