@@ -62,4 +62,4 @@ public class NotificationPublisher extends BroadcastReceiver{
     }
 }
 ```
-[\[Siguiente Paso\]](02_TODOContent.md)
+[\[Siguiente Paso\]](02_TodoDbHelper.md)
