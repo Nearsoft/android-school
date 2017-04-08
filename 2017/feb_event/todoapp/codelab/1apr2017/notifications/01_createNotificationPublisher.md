@@ -10,7 +10,7 @@ git clone https://github.com/Nearsoft/android-school.git
 y ejecuta el siguiente comando:
 
 ```shell
-git reset --hard 0ee9c364fe4977fd5957f669bd5e0df82e5a87ea
+git reset --hard 92e4823094e24e6d51a1064d0a40262fa21ea3c0
 ```
 
 En este codelab crearemos una actividad que nos permita generar una alarma en nuestro TODO, la cual se pondra automáticamente 10 segundos después de que se guardó el TODO.
