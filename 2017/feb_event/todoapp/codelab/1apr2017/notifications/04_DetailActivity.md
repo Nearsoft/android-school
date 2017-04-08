@@ -14,6 +14,11 @@
         ```java
             private AlarmHandler alarmHandler;
         ```
+        
+    - Instanciemos este **alarmHandler** en nuestro **onCreate()**
+    ``` java
+        alarmHandler = new AlarmHandler(this);
+    ```
     - Dentro del metodo **enableToDoViewEdition** hay que habilitar el switch si se esta en modo de edición: 
         ```java
             notificationSwitch.setEnabled(isEditClicking);
