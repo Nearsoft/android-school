@@ -1,20 +1,41 @@
+Notifications and Alarms
+=====================
+
+Clona el siguiente repositorio para estar sincronizados todos.
+
+```shell
+git clone https://github.com/Nearsoft/android-school.git
+```
+
+y ejecuta el siguiente comando:
+
+```shell
+git reset --hard 92e4823094e24e6d51a1064d0a40262fa21ea3c0
+```
+
+En este codelab crearemos una actividad que nos permita generar una alarma en nuestro TODO, la cual se pondra automáticamente 10 segundos después de que se guardó el TODO.
+
+1. Crearemos un nuevo paquete dentro de activities con el nombre notification:
+<img src="http://image.prntscr.com/image/3221873a79c94f8badfa9c2c17036f4c.png">
+
+2. Dentro de ella crear una clase que se llame **NotificationPublisher**
+<img src="http://image.prntscr.com/image/0c19ff3ff4054c58a17d2172b4fec94e.png">
+
+3. El contenido de esta será el siguiente: 
+```java
 package com.nearsoft.androidschool.todoapp.activities.notification;
 
 
 import android.app.Notification;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.NotificationCompat;
 
-import com.nearsoft.androidschool.todoapp.R;
-import com.nearsoft.androidschool.todoapp.activities.detail.DetailActivity;
-import com.nearsoft.androidschool.todoapp.models.ToDoContent;
+public class NotificationPublisher extends BroadcastReceiver{
+    public static String NOTIFICATION = "notification";
+    public static String NOTIFICATION_ID = "notification-id";
 
-public class NotificationPublisher extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -40,3 +61,5 @@ public class NotificationPublisher extends BroadcastReceiver {
         notificationManager.notify(todoItem.getId().intValue(), notification);
     }
 }
+```
+[\[Siguiente Paso\]](02_TODOContent.md)

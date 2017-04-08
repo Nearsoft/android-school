@@ -1,14 +1,9 @@
 package com.nearsoft.androidschool.todoapp.activities.detail;
 
-import android.app.AlarmManager;
-import android.app.Notification;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -22,12 +17,13 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.nearsoft.androidschool.todoapp.R;
-import com.nearsoft.androidschool.todoapp.activities.notification.NotificationPublisher;
+import com.nearsoft.androidschool.todoapp.activities.notification.AlarmHandler;
 import com.nearsoft.androidschool.todoapp.database.ToDoDbHelper;
 import com.nearsoft.androidschool.todoapp.fragment.DatePickerFragment;
 import com.nearsoft.androidschool.todoapp.models.ToDoContent;
 
 import java.text.DateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class DetailActivity extends AppCompatActivity {
@@ -48,6 +44,7 @@ public class DetailActivity extends AppCompatActivity {
     private static final int REQUEST_LOCATION_ENABLED = 0;
     private static final int REQUEST_LOCATION_PERMISSION = 1;
     private ToDoDbHelper toDoDbHelper;
+    private AlarmHandler alarmHandler;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,6 +57,13 @@ public class DetailActivity extends AppCompatActivity {
         setDateListener();
         toDoDbHelper = new ToDoDbHelper(this);
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        alarmHandler = new AlarmHandler(this);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        todoItem = (ToDoContent) data.getSerializableExtra(EXTRA_TODO_KEY);
+        displayDetail();
     }
 
     @Override
@@ -115,7 +119,11 @@ public class DetailActivity extends AppCompatActivity {
         dialog.attachListener(new android.app.DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
-                Date dateTime = new Date(year, month, dayOfMonth, 0, 0);
+                Calendar calendar = Calendar.getInstance();
+                int hours = calendar.get(Calendar.HOUR);
+                int minutes = calendar.get(Calendar.MINUTE);
+                int seconds = calendar.get(Calendar.SECOND) + 20;
+                Date dateTime = new Date(year, month, dayOfMonth, hours, minutes, seconds);
                 updateDate(dateTime);
             }
         });
@@ -127,14 +135,6 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 dateCardView.setVisibility(isChecked ? View.VISIBLE : View.INVISIBLE);
-            }
-        });
-        notificationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    prepareNotification(getNotification(todoItem), todoItem.getDate());
-                }
             }
         });
     }
@@ -168,13 +168,17 @@ public class DetailActivity extends AppCompatActivity {
         } else {
             todoItem.setDate(null);
         }
+        if (notificationSwitch.isChecked()) {
+            todoItem.setNotify(true);
+        }
         todoItem.setTitle(titleEditTextView.getText().toString());
         todoItem.setNotes(notesEditTextView.getText().toString());
         if (todoItem.getId() == null) {
-            toDoDbHelper.saveToDo(todoItem);
+            todoItem.setId(toDoDbHelper.saveToDo(todoItem));
         } else {
             toDoDbHelper.updateToDo(todoItem);
         }
+        alarmHandler.createOrUpdateAlarm(todoItem);
     }
 
     private void populateToDoObject() {
@@ -189,6 +193,7 @@ public class DetailActivity extends AppCompatActivity {
             updateDate(todoItem.getDate());
         }
         dateSwitch.setChecked(todoItem.hasDate());
+        notificationSwitch.setChecked(todoItem.isNotify());
     }
 
     private ToDoContent getTodo() {
@@ -205,24 +210,7 @@ public class DetailActivity extends AppCompatActivity {
         DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getApplicationContext());
         String dateText = dateFormat.format(date);
         dateTextView.setText(dateText);
+        todoItem.setDate(date);
     }
 
-    public void prepareNotification(Notification notification, Date date) {
-        Intent notificationIntent = new Intent(this, NotificationPublisher.class);
-        notificationIntent.putExtra(NotificationPublisher.NOTIFICATION_ID, 1);
-        notificationIntent.putExtra(NotificationPublisher.NOTIFICATION, notification);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        long remainingMillis = SystemClock.elapsedRealtime() + date.getTime();
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, remainingMillis, pendingIntent);
-    }
-
-    public Notification getNotification(ToDoContent todoItem) {
-        Notification.Builder builder = new Notification.Builder(this);
-        builder.setContentTitle(todoItem.getTitle())
-                .setContentText(todoItem.getDate().toString())
-                .setSmallIcon(R.drawable.ic_event_note_black);
-        return builder.build();
-    }
 }
