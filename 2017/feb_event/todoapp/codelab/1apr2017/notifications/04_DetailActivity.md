@@ -1,6 +1,5 @@
 [\[Paso Anterior\]](03_layout.md)
 
-
 7. Dentro de **DetailActivity** agregaremos lo siguiente:
     - Declaracion de nuestro nuevo switch:
         ```java 
@@ -67,6 +66,9 @@
         dialog.show(this.getSupportFragmentManager(), "datePicker");
     }
     ```
+   
+## Nuestro **DetailActivity** debe verse como [este](https://gist.github.com/Mathreyu/7216fb52e06bec624338bbc3f84a8f06.js)
+ (hay que borrar algunos métodos que no se usarán)
 <img src="http://image.prntscr.com/image/aef062f0d8af41ef8ae03e94c4b753a1.png"/>
  
 
