@@ -10,6 +10,10 @@
         ```java 
         notificationSwitch = (Switch) findViewById(R.id.switch_notification);
         ```
+    - Agregamos una instancia a nuestro **AlarmHandler** justo debajo de nuestro **todoDbHelper**
+        ```java
+            private AlarmHandler alarmHandler;
+        ```
     - Dentro del metodo **enableToDoViewEdition** hay que habilitar el switch si se esta en modo de edición: 
         ```java
             notificationSwitch.setEnabled(isEditClicking);
