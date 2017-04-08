@@ -40,7 +40,24 @@
                 alarmHandler.createOrUpdateAlarm(todoItem);
           }
         ```
-
+    - Editamos el metodo **showDatePicker** para que la notificacion se lleve acabo 20 segundos despues de ser guardada
+    ```java
+        private void showDatePicker() {
+        DatePickerFragment dialog = new DatePickerFragment();
+        dialog.attachListener(new android.app.DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
+                Calendar calendar = Calendar.getInstance();
+                int hours = calendar.get(Calendar.HOUR);
+                int minutes = calendar.get(Calendar.MINUTE);
+                int seconds = calendar.get(Calendar.SECOND) + 20;
+                Date dateTime = new Date(year, month, dayOfMonth, hours, minutes, seconds);
+                updateDate(dateTime);
+            }
+        });
+        dialog.show(this.getSupportFragmentManager(), "datePicker");
+    }
+    ```
 <img src="http://image.prntscr.com/image/aef062f0d8af41ef8ae03e94c4b753a1.png"/>
  
 
