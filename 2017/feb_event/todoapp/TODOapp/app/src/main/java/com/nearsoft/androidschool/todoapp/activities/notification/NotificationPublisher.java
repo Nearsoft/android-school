@@ -35,6 +35,7 @@ public class NotificationPublisher extends BroadcastReceiver {
                 .setContentIntent(notificationIntent)
                 .setSmallIcon(R.drawable.ic_event_note_black);
         Notification notification = builder.build();
+        notification.flags |= Notification.FLAG_AUTO_CANCEL;
 
         notificationManager.notify(todoItem.getId().intValue(), notification);
     }
