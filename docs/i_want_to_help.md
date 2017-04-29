@@ -54,3 +54,9 @@ And create an [issue](https://github.com/Nearsoft/androidschool/issues) with you
 * Fix typos
 * Add translations
 * etc.
+
+## In order to be considered in the team
+
+* Join the initial meeting
+* Prepare your topic with time
+* The Android School team will approve or deny your access.
