@@ -12,6 +12,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -65,7 +66,9 @@ public class ApacheHttpClientTransport implements HttpTransport {
             Log.i("HTTPClientRequest", request.toString());
 
             HttpResponse clientResponse = httpClient.execute(request);
-            HttpExampleResponse response = new HttpExampleResponse(clientResponse);
+            int statusCode = clientResponse.getStatusLine().getStatusCode();
+            String body = EntityUtils.toString(clientResponse.getEntity());
+            HttpExampleResponse response = new HttpExampleResponse(statusCode, body);
 
             Log.i("HTTPClientResponse", response.toString());
 
