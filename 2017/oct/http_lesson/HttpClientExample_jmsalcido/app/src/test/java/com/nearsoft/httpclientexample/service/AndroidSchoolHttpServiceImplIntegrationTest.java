@@ -6,10 +6,13 @@ import com.nearsoft.httpclientexample.model.Mentor;
 import com.nearsoft.httpclientexample.model.Student;
 import com.nearsoft.httpclientexample.transport.HttpTransport;
 import com.nearsoft.httpclientexample.transport.HttpUrlConnectionTransport;
+import com.nearsoft.httpclientexample.transport.OkHttpTransport;
 
 import org.junit.Test;
 
 import java.util.List;
+
+import okhttp3.OkHttpClient;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
@@ -24,7 +27,7 @@ public class AndroidSchoolHttpServiceImplIntegrationTest {
         System.out.println("This should be executed in a different task, but ok for this example");
 
         HttpTransport httpTransport =
-                new HttpUrlConnectionTransport();
+                new OkHttpTransport(new OkHttpClient.Builder().build());
 
         AndroidSchoolHttpServiceImpl androidSchoolHttpService =
                 new AndroidSchoolHttpServiceImpl(httpTransport);
@@ -63,7 +66,9 @@ public class AndroidSchoolHttpServiceImplIntegrationTest {
         assertThat(studentFromBackend.getEmail(), is(equalTo(studentToAdd.getEmail())));
         assertThat(studentFromBackend.getSchool(), is(equalTo(studentToAdd.getSchool())));
 
-        System.out.println("Updating student name to " + studentFromBackend.getName() + " - updated");
+        System.out.println(
+                "Updating student name to " + studentFromBackend.getName() + " - updated"
+        );
         String nameToSend = studentFromBackend.getName() + " - updated";
         studentFromBackend.setName(nameToSend);
 
