@@ -68,7 +68,7 @@ class GitHubAdapter: RecyclerView.Adapter<GitHubAdapter.UserHolder>()  {
 Now we have our UI ready to work.
 
 ## Models
-We need to create kotlin models that GSON can translate from JSON and to GSON. We will use kotlin ```data``` class and the GSON annotation ```@SerializedName()```. This annotation will treat the field with a different key in the JSON object.
+We need to create kotlin models that GSON can translate from JSON and to Kotlin data classes. We will use kotlin ```data``` class and the GSON annotation ```@SerializedName()```. This annotation tells GSON how the property is named in the JSON object.
 For example:
 ```json
 {
@@ -143,7 +143,7 @@ val retrofit = Retrofit.Builder()
                 .build()
 val gitHubClient = retrofit.create(GithubClient::class.java)
 ```
-Finally, we will call our method and define a callback object in which our app will decide what to do in the call's response events. We will call the .enqueue() method:
+Finally, we will call our method and define a callback object in which our app will decide what to do in the call's response events. We will call the .enqueue() method, which recieves a Callback<T> object:
 ```kotlin
 gitHubClient.reposForUser(searchField.text.toString()).enqueue(
         object : Callback<GitHubSearchResult> {
