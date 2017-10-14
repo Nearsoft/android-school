@@ -20,7 +20,13 @@ Something like this:
 
 <a href="https://ibb.co/k6SuYw"><img src="https://image.ibb.co/fUfEYw/Screen_Shot_2017_10_13_at_10_55_44_PM.png" alt="Screen_Shot_2017_10_13_at_10_55_44_PM" border="0" width="300px"></a>
 
-Do the respective view search in the MainActivity.kt file.
+We will do the respective view binding in the MainActivity.kt file:
+```kotlin
+val searchField: EditText by lazy { findViewById<EditText>(R.id.repo_search) }
+val searchButton: Button by lazy { findViewById<Button>(R.id.button_search) }
+val searchProgress: ProgressBar by lazy { findViewById<ProgressBar>(R.id.progress_search) }
+val usersRV: RecyclerView by lazy { findViewById<RecyclerView>(R.id.users_rv) }
+```
 
 ## Adapter
 We need to write an adapter for the RecyclerView:
@@ -159,6 +165,8 @@ gitHubClient.searchForUser(searchField.text.toString()).enqueue(
         }
 )
 ```
+This will go inside a onClickListener on the search button.
+
 ## Final product
 Our search app will look like this:
 
