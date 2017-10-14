@@ -137,7 +137,6 @@ In MainActivity.kt, on the onCreate() method, we will create and use a retrofit 
 
 ```kotlin
 val retrofit = Retrofit.Builder()
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl("http://api.github.com")
                 .build()
