@@ -129,7 +129,7 @@ We will create an interface where our calls will be placed in form of methods:
 ```kotlin
 interface GithubClient {
     @GET("/search/users")
-    fun reposForUser(@Query("q") user: String): Call<GitHubSearchResult>
+    fun searchForUser(@Query("q") user: String): Call<GitHubSearchResult>
 }
 ```
 
@@ -145,7 +145,7 @@ val gitHubClient = retrofit.create(GithubClient::class.java)
 ```
 Finally, we will call our method and define a callback object in which our app will decide what to do in the call's response events. We will call the .enqueue() method, which recieves a Callback<T> object:
 ```kotlin
-gitHubClient.reposForUser(searchField.text.toString()).enqueue(
+gitHubClient.searchForUser(searchField.text.toString()).enqueue(
         object : Callback<GitHubSearchResult> {
             override fun onFailure(call: Call<GitHubSearchResult>?, t: Throwable?) {
                 t?.printStackTrace()
