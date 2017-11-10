@@ -58,15 +58,6 @@ class TimerFragmentTest {
     }
 
     @Test
-    fun startingPomodoroShouldChangeFabIcon() {
-        var drawable = shadowOf(fab.drawable)
-        Assert.assertEquals(android.R.drawable.ic_media_play, drawable.createdFromResId)
-        fab.performClick()
-        drawable = shadowOf(fab.drawable)
-        Assert.assertEquals(android.R.drawable.ic_media_pause, drawable.createdFromResId)
-    }
-
-    @Test
     fun fabShouldHaveCorrectImageDependingOnState() {
         // Should begin with play icon
         var drawable = shadowOf(fab.drawable)
