@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Not Tomatoro</string>
+    <string name="action_settings">Settings</string>
+    <string name="timer_completed_text">Time is UP!</string>
+    <string name="timer_work_5min_text">Work - 5 min</string>
+    <string name="timer_break_5min_text">Break - 5 min</string>
+    <string name="timer_break_1min_text">Break - 1 min</string>
+    <string name="reset_text">Reset</string>
+    <string name="set_your_pomodoro_text">Set your pomodoro</string>
+</resources>
