@@ -56,7 +56,6 @@ class TimerFragment : Fragment(), TimerContract.View {
     fun setPresenter(presenter: TimerContract.Presenter) {
         this.presenter = presenter
         this.presenter.bindView(this)
-        timerTextView.text = presenter.getSelectedTime()
     }
 
     override fun updateTime(text: String) {
@@ -65,25 +64,22 @@ class TimerFragment : Fragment(), TimerContract.View {
 
     override fun timerStarted() {
         // Show pause button
-        fab.setImageResource(android.R.drawable.ic_media_pause)
+
         // Show stop button
         resetButton.visibility = View.VISIBLE
     }
 
     override fun timerPaused() {
         // Show play button
-        fab.setImageResource(android.R.drawable.ic_media_play)
     }
 
     override fun timerCompleted() {
         timerTextView.text = getString(R.string.timer_completed_text)
-        fab.setImageResource(android.R.drawable.ic_media_play)
     }
 
     override fun timerReset() {
         // Show play button
         fab.setImageResource(android.R.drawable.ic_media_play)
-        timerTextView.text = presenter.getSelectedTime()
     }
 
 

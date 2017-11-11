@@ -17,10 +17,6 @@ import org.robolectric.shadows.support.v4.SupportFragmentTestUtil
 
 @RunWith(RobolectricTestRunner::class)
 class TimerFragmentTest {
-    private lateinit var timerText: TextView
-    private lateinit var breakSmallOption: RadioButton
-    private lateinit var breakLargeOption: RadioButton
-    private lateinit var workOption: RadioButton
     private lateinit var fab: FloatingActionButton
     private lateinit var presenter: TimerPresenter
 
@@ -28,34 +24,17 @@ class TimerFragmentTest {
     fun setup() {
         presenter = TimerPresenter()
         val fragment = TimerFragment()
-        SupportFragmentTestUtil.startVisibleFragment(fragment)
+
         fragment.setPresenter(presenter)
 
         val view = fragment.view!!
 
-        timerText = view.findViewById(R.id.timerTextView)
-        breakSmallOption = view.findViewById(R.id.breakSmallRadioButton)
-        breakLargeOption = view.findViewById(R.id.breakLargeRadioButton)
-        workOption = view.findViewById(R.id.workRadioButton)
         fab = view.findViewById(R.id.fab)
     }
 
-    @Test
-    fun timerTextShouldHaveAnInitialValue() {
-        assertFalse(StringUtils.isEmpty(timerText.text.toString()))
-    }
+    // TEST - timerTextShouldHaveAnInitialValue
 
-    @Test
-    fun selectingPomodoroShouldChangeText() {
-        breakLargeOption.performClick()
-        assertEquals("05:00", timerText.text)
-
-        breakSmallOption.performClick()
-        assertEquals("01:00", timerText.text)
-
-        workOption.performClick()
-        assertEquals("05:00", timerText.text)
-    }
+    // TEST - selectingPomodoroShouldChangeText
 
     @Test
     fun fabShouldHaveCorrectImageDependingOnState() {

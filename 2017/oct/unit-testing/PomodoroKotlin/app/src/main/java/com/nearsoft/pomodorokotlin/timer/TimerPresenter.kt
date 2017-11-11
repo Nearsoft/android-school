@@ -4,7 +4,7 @@ import android.os.CountDownTimer
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-open class TimerPresenter : TimerContract.Presenter {
+class TimerPresenter : TimerContract.Presenter {
 
     var view: TimerContract.View? = null
     private val timeFormat = "%02d:%02d"

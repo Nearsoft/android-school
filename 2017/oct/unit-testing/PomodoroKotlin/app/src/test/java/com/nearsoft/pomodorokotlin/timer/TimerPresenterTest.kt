@@ -7,10 +7,10 @@ import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mock
 import org.mockito.Mockito.spy
 import org.mockito.Mockito.verify
+import org.mockito.MockitoAnnotations
 import org.mockito.junit.MockitoJUnitRunner
 import java.util.concurrent.TimeUnit
 
-@RunWith(MockitoJUnitRunner::class)
 class TimerPresenterTest {
 
     @Mock
@@ -20,28 +20,24 @@ class TimerPresenterTest {
 
     @Before
     fun setupTest() {
-
+        MockitoAnnotations.initMocks(this)
         timerPresenter = TimerPresenter()
         timerPresenter.bindView(view)
     }
-    
+
     @Test
     fun setTimeShouldResetTimer() {
-        val presenter = spy(timerPresenter)
-        presenter.setTime(1)
-        verify(view).timerReset()
+        TODO("Test not implemented")
     }
     
     @Test
     fun setTimeShouldUpdateTheView() {
-        timerPresenter.setTime(1)
-        verify(view).updateTime(anyString())
+        TODO("Test not implemented")
     }
 
     @Test
     fun setTimeShouldUpdateTheViewWithTheCorrectFormat() {
-        timerPresenter.setTime(TimeUnit.MINUTES.toMillis(2)+TimeUnit.SECONDS.toMillis(30))
-        verify(view).updateTime("02:30")
+        TODO("Test not implemented")
     }
 
 //    @Test
@@ -52,13 +48,11 @@ class TimerPresenterTest {
 
     @Test
     fun pauseTimerShouldLetTheViewKnow() {
-        timerPresenter.pauseTimer()
-        verify(view).timerPaused()
+        TODO("Test not implemented")
     }
 
     @Test
     fun resetTimerShouldLetTheViewKnow() {
-        timerPresenter.resetTimer()
-        verify(view).timerReset()
+        TODO("Test not implemented")
     }
 }
