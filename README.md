@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <img src="https://rawgit.com/Nearsoft/androidschool/master/media/logo.png" alt="Android School logo">
+  <img src="https://cdn.jsdelivr.net/gh/Nearsoft/androidschool@master/media/logo.png" alt="Android School logo">
   <br>
   <br>
   <br>
